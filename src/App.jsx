@@ -157,6 +157,15 @@ function App() {
   const [categories, setCategories] = useLocalStorage('fintrack_cats', defaultCategories);
   const [merchantRules, setMerchantRules] = useLocalStorage('fintrack_rules', defaultRules);
   const [balance, setBalance] = useLocalStorage('fintrack_real_balance', 180000);
+  const [theme, setTheme] = useLocalStorage('fintrack_theme', 'dark');
+  const [goals, setGoals] = useLocalStorage('fintrack_goals', [
+    { id: 1, name: 'Emergency Fund', target: 500000, current: 320000 },
+    { id: 2, name: 'Vacation', target: 150000, current: 45000 }
+  ]);
+
+  useEffect(() => {
+    document.documentElement.setAttribute('data-theme', theme);
+  }, [theme]);
 
   useEffect(() => {
     setCategories(prev => {
@@ -304,6 +313,15 @@ function App() {
     });
   };
 
+  const handleDeleteTransaction = (id) => {
+    const tx = transactions.find(t => t.id === id);
+    if (!tx) return;
+    
+    // Adjust balance back 
+    setBalance(prev => prev - tx.amount);
+    setTransactions(prev => prev.filter(t => t.id !== id));
+  };
+
   const handleAddBudget = () => {
     if (!newBudgetCat || !newBudgetLimit) return;
     const limitNum = parseFloat(newBudgetLimit);
@@ -387,6 +405,35 @@ function App() {
           </div>
         </div>
       </div>
+
+      {/* ═══ SAVINGS GOALS ═══ */}
+      <div className="card anim-delay-6" style={{ marginTop: '1.5rem' }}>
+        <div className="card-header">
+          <h3 style={{ fontSize: '1.125rem', margin: 0, display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+            <Sparkles size={18} className="text-primary" /> Savings Goals
+          </h3>
+        </div>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: '1.5rem', marginTop: '1.5rem' }}>
+          {goals.map(goal => {
+            const percent = Math.min((goal.current / goal.target) * 100, 100);
+            return (
+              <div key={goal.id} style={{ padding: '1.25rem', background: 'hsla(var(--surface-raised), 0.5)', borderRadius: '0.75rem', border: '1px solid hsla(var(--border), 0.5)' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.75rem' }}>
+                  <span style={{ fontWeight: 600 }}>{goal.name}</span>
+                  <span style={{ color: 'hsl(var(--primary))', fontWeight: 600 }}>{percent.toFixed(0)}%</span>
+                </div>
+                <div className="progress-bg" style={{ height: 8 }}>
+                  <div className="progress-bar" style={{ width: `${percent}%`, backgroundColor: 'hsl(var(--primary))' }} />
+                </div>
+                <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '0.75rem', fontSize: '0.8125rem', color: 'hsl(var(--fg-muted))' }}>
+                  <span><strong style={{ color: 'hsl(var(--fg))' }}>{formatINR(goal.current)}</strong> saved</span>
+                  <span>{formatINR(goal.target)}</span>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </div>
     </div>
   );
 
@@ -447,7 +494,16 @@ function App() {
                   <td style={{ textAlign: 'right', fontWeight: 600 }} className={tx.type === 'income' ? 'text-emerald' : ''}>
                     {tx.type === 'income' ? '+' : ''}{formatINR(tx.amount)}
                   </td>
-                  <td style={{ textAlign: 'center' }}><button className="btn-icon" style={{ padding: '0.25rem' }}><MoreHorizontal size={16} /></button></td>
+                  <td style={{ textAlign: 'center' }}>
+                    <button 
+                      className="btn-icon" 
+                      style={{ padding: '0.25rem', color: 'hsl(var(--rose))' }}
+                      onClick={() => handleDeleteTransaction(tx.id)}
+                      title="Delete Transaction"
+                    >
+                      <Trash2 size={16} />
+                    </button>
+                  </td>
                 </tr>
               ))}
             </tbody>
@@ -622,6 +678,84 @@ function App() {
     </div>
   );
 
+  /* ── RENDER SETTINGS ── */
+  const renderSettings = () => (
+    <div className="page-content anim-in">
+      <div className="card" style={{ maxWidth: '600px', margin: '0 auto' }}>
+        <div className="card-header" style={{ marginBottom: '1.5rem' }}>
+          <h3 style={{ fontSize: '1.25rem', margin: 0, display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+            <Settings size={20} className="text-primary" /> Settings & Data
+          </h3>
+        </div>
+        
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
+          {/* Theme Toggle */}
+          <div>
+            <h4 style={{ marginBottom: '0.5rem', fontSize: '1rem', color: 'hsl(var(--fg))' }}>Appearance</h4>
+            <div style={{ display: 'flex', gap: '1rem' }}>
+              <button 
+                className={`btn ${theme === 'dark' ? 'btn-primary' : 'btn-outline'}`} 
+                onClick={() => setTheme('dark')}
+              >
+                Dark Mode
+              </button>
+              <button 
+                className={`btn ${theme === 'light' ? 'btn-primary' : 'btn-outline'}`} 
+                onClick={() => setTheme('light')}
+              >
+                Light Mode
+              </button>
+            </div>
+          </div>
+
+          <hr style={{ borderColor: 'hsla(var(--border), 0.5)', borderStyle: 'solid', margin: '0' }} />
+
+          {/* Backup */}
+          <div>
+            <h4 style={{ marginBottom: '0.5rem', fontSize: '1rem', color: 'hsl(var(--fg))' }}>Data Backup & Export</h4>
+            <p style={{ fontSize: '0.8125rem', color: 'hsl(var(--fg-muted))', marginBottom: '1rem' }}>
+              Your data is stored locally in this browser. Export it to keep it safe.
+            </p>
+            <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
+              <button 
+                className="btn btn-primary"
+                onClick={() => {
+                  const data = { transactions, budgets, categories, merchantRules, balance };
+                  const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+                  const url = URL.createObjectURL(blob);
+                  const a = document.createElement('a');
+                  a.href = url;
+                  a.download = `fintrack_backup_${new Date().toISOString().split('T')[0]}.json`;
+                  a.click();
+                  URL.revokeObjectURL(url);
+                }}
+              >
+                <Download size={16} /> Export JSON Backup
+              </button>
+
+              <button 
+                className="btn btn-outline"
+                onClick={() => {
+                  const header = 'ID,Date,Time,Name,Category,Type,Status,Amount\n';
+                  const rows = transactions.map(t => `${t.id},"${t.date}","${t.time}","${t.name}","${t.category}","${t.type}","${t.status}",${t.amount}`).join('\n');
+                  const blob = new Blob([header + rows], { type: 'text/csv' });
+                  const url = URL.createObjectURL(blob);
+                  const a = document.createElement('a');
+                  a.href = url;
+                  a.download = `fintrack_transactions_${new Date().toISOString().split('T')[0]}.csv`;
+                  a.click();
+                  URL.revokeObjectURL(url);
+                }}
+              >
+                <Download size={16} /> Export CSV
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+
   return (
     <div className="app-shell">
       {/* ═══ LIVE BACKGROUND ═══ */}
@@ -655,6 +789,9 @@ function App() {
           <div className={`nav-link ${currentView === 'analytics' ? 'active' : ''}`} onClick={() => setCurrentView('analytics')}>
             <BarChart3 size={18} /> Analytics
           </div>
+          <div className={`nav-link ${currentView === 'settings' ? 'active' : ''}`} onClick={() => setCurrentView('settings')}>
+            <Settings size={18} /> Settings
+          </div>
         </div>
       </aside>
 
@@ -681,6 +818,7 @@ function App() {
         {currentView === 'budgets' && renderBudgets()}
         {currentView === 'categories' && renderCategories()}
         {currentView === 'analytics' && renderAnalytics()}
+        {currentView === 'settings' && renderSettings()}
       </div>
 
       {/* ═══ SMS MODAL ═══ */}
