@@ -25,7 +25,8 @@ import {
   MoreHorizontal,
   Tags,
   Check,
-  Trash2
+  Trash2,
+  Edit2
 } from 'lucide-react';
 import { 
   AreaChart, 
@@ -141,6 +142,8 @@ function App() {
   const [smsOpen, setSmsOpen]   = useState(false);
   const [catModalOpen, setCatModalOpen] = useState(false);
   const [budgetModalOpen, setBudgetModalOpen] = useState(false);
+  const [goalModalOpen, setGoalModalOpen] = useState(false);
+  const [confirmModal, setConfirmModal] = useState({ open: false, title: '', message: '', onConfirm: null });
   
   // Inputs
   const [smsText, setSmsText]   = useState('');
@@ -150,6 +153,10 @@ function App() {
   const [newCatColor, setNewCatColor] = useState(PALETTE[0]);
   const [newBudgetCat, setNewBudgetCat] = useState('');
   const [newBudgetLimit, setNewBudgetLimit] = useState('');
+  const [newGoalName, setNewGoalName] = useState('');
+  const [newGoalTarget, setNewGoalTarget] = useState('');
+  const [newGoalCurrent, setNewGoalCurrent] = useState('');
+  const [editingGoalId, setEditingGoalId] = useState(null);
 
   // "Backend" State via LocalStorage
   const [transactions, setTransactions] = useLocalStorage('fintrack_txs', seedTransactions);
@@ -289,37 +296,33 @@ function App() {
     setCatModalOpen(false);
   };
 
-  const handleDeleteCategory = (catName) => {
-    if (catName === 'Other' || catName === 'Unknown') return; // Cannot delete fallback categories
+  const requestConfirm = (title, message, onConfirm) => {
+    setConfirmModal({ open: true, title, message, onConfirm });
+  };
 
-    // 1. Remove category from list
-    setCategories(prev => prev.filter(c => c.name !== catName));
-    
-    // 2. Reassign transactions to 'Unknown'
-    setTransactions(prev => prev.map(t => t.category === catName ? { ...t, category: 'Unknown' } : t));
-    
-    // 3. Remove budget if it exists for this category
-    setBudgets(prev => prev.filter(b => b.category !== catName));
-    
-    // 4. Update merchant rules to 'Unknown'
-    setMerchantRules(prev => {
-      const newRules = { ...prev };
-      Object.keys(newRules).forEach(merchant => {
-        if (newRules[merchant] === catName) {
-          newRules[merchant] = 'Unknown';
-        }
+  const handleDeleteCategory = (catName) => {
+    if (catName === 'Other' || catName === 'Unknown') return;
+    requestConfirm('Delete Category', `Are you sure you want to delete "${catName}"? This will move its transactions to 'Unknown'.`, () => {
+      setCategories(prev => prev.filter(c => c.name !== catName));
+      setTransactions(prev => prev.map(t => t.category === catName ? { ...t, category: 'Unknown' } : t));
+      setBudgets(prev => prev.filter(b => b.category !== catName));
+      setMerchantRules(prev => {
+        const newRules = { ...prev };
+        Object.keys(newRules).forEach(m => {
+          if (newRules[m] === catName) newRules[m] = 'Unknown';
+        });
+        return newRules;
       });
-      return newRules;
     });
   };
 
   const handleDeleteTransaction = (id) => {
     const tx = transactions.find(t => t.id === id);
     if (!tx) return;
-    
-    // Adjust balance back 
-    setBalance(prev => prev - tx.amount);
-    setTransactions(prev => prev.filter(t => t.id !== id));
+    requestConfirm('Delete Transaction', `Are you sure you want to delete this transaction for ${formatINR(tx.amount)}?`, () => {
+      setBalance(prev => prev - tx.amount);
+      setTransactions(prev => prev.filter(t => t.id !== id));
+    });
   };
 
   const handleAddBudget = () => {
@@ -341,7 +344,34 @@ function App() {
   };
 
   const handleDeleteBudget = (id) => {
-    setBudgets(prev => prev.filter(b => b.id !== id));
+    requestConfirm('Delete Budget', 'Are you sure you want to delete this budget limit?', () => {
+      setBudgets(prev => prev.filter(b => b.id !== id));
+    });
+  };
+
+  const handleSaveGoal = () => {
+    if (!newGoalName || !newGoalTarget) return;
+    const targetNum = parseFloat(newGoalTarget);
+    const currentNum = parseFloat(newGoalCurrent) || 0;
+    if (isNaN(targetNum) || targetNum <= 0) return;
+
+    if (editingGoalId) {
+      setGoals(prev => prev.map(g => g.id === editingGoalId ? { ...g, name: newGoalName, target: targetNum, current: currentNum } : g));
+    } else {
+      setGoals(prev => [...prev, { id: Date.now(), name: newGoalName, target: targetNum, current: currentNum }]);
+    }
+    
+    setGoalModalOpen(false);
+    setEditingGoalId(null);
+    setNewGoalName('');
+    setNewGoalTarget('');
+    setNewGoalCurrent('');
+  };
+
+  const handleDeleteGoal = (id) => {
+    requestConfirm('Delete Savings Goal', 'Are you sure you want to delete this savings goal?', () => {
+      setGoals(prev => prev.filter(g => g.id !== id));
+    });
   };
 
   /* ── RENDER DASHBOARD ── */
@@ -412,6 +442,15 @@ function App() {
           <h3 style={{ fontSize: '1.125rem', margin: 0, display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
             <Sparkles size={18} className="text-primary" /> Savings Goals
           </h3>
+          <button className="btn btn-outline" style={{ padding: '0.25rem 0.75rem', fontSize: '0.8125rem' }} onClick={() => {
+            setEditingGoalId(null);
+            setNewGoalName('');
+            setNewGoalTarget('');
+            setNewGoalCurrent('');
+            setGoalModalOpen(true);
+          }}>
+            <Plus size={14} /> New Goal
+          </button>
         </div>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: '1.5rem', marginTop: '1.5rem' }}>
           {goals.map(goal => {
@@ -420,7 +459,17 @@ function App() {
               <div key={goal.id} style={{ padding: '1.25rem', background: 'hsla(var(--surface-raised), 0.5)', borderRadius: '0.75rem', border: '1px solid hsla(var(--border), 0.5)' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.75rem' }}>
                   <span style={{ fontWeight: 600 }}>{goal.name}</span>
-                  <span style={{ color: 'hsl(var(--primary))', fontWeight: 600 }}>{percent.toFixed(0)}%</span>
+                  <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
+                    <span style={{ color: 'hsl(var(--primary))', fontWeight: 600 }}>{percent.toFixed(0)}%</span>
+                    <button className="btn-icon" style={{ color: 'hsl(var(--fg-muted))', padding: 0 }} onClick={() => {
+                      setEditingGoalId(goal.id);
+                      setNewGoalName(goal.name);
+                      setNewGoalTarget(goal.target);
+                      setNewGoalCurrent(goal.current);
+                      setGoalModalOpen(true);
+                    }} title="Edit Goal"><Edit2 size={14}/></button>
+                    <button className="btn-icon" style={{ color: 'hsl(var(--rose))', padding: 0 }} onClick={() => handleDeleteGoal(goal.id)} title="Delete Goal"><Trash2 size={14}/></button>
+                  </div>
                 </div>
                 <div className="progress-bg" style={{ height: 8 }}>
                   <div className="progress-bar" style={{ width: `${percent}%`, backgroundColor: 'hsl(var(--primary))' }} />
@@ -821,6 +870,26 @@ function App() {
         {currentView === 'settings' && renderSettings()}
       </div>
 
+      {/* ═══ BOTTOM NAV (MOBILE) ═══ */}
+      <nav className="bottom-nav">
+        <div className={`bottom-nav-item ${currentView === 'dashboard' ? 'active' : ''}`} onClick={() => setCurrentView('dashboard')}>
+          <LayoutDashboard size={20} />
+          <span>Home</span>
+        </div>
+        <div className={`bottom-nav-item ${currentView === 'transactions' ? 'active' : ''}`} onClick={() => setCurrentView('transactions')}>
+          <CreditCard size={20} />
+          <span>Txns</span>
+        </div>
+        <div className={`bottom-nav-item ${currentView === 'budgets' ? 'active' : ''}`} onClick={() => setCurrentView('budgets')}>
+          <PiggyBank size={20} />
+          <span>Budgets</span>
+        </div>
+        <div className={`bottom-nav-item ${currentView === 'settings' ? 'active' : ''}`} onClick={() => setCurrentView('settings')}>
+          <Settings size={20} />
+          <span>Settings</span>
+        </div>
+      </nav>
+
       {/* ═══ SMS MODAL ═══ */}
       {smsOpen && (
         <div className="modal-overlay" onClick={() => setSmsOpen(false)}>
@@ -930,6 +999,64 @@ function App() {
             <div className="modal-actions">
               <button className="btn btn-outline" onClick={() => setBudgetModalOpen(false)}>Cancel</button>
               <button className="btn btn-primary" onClick={handleAddBudget}>Save Budget</button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* ═══ ADD/EDIT GOAL MODAL ═══ */}
+      {goalModalOpen && (
+        <div className="modal-overlay" onClick={() => setGoalModalOpen(false)}>
+          <div className="modal-dialog" onClick={e => e.stopPropagation()} style={{ maxWidth: '400px' }}>
+            <div className="modal-top">
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                <h3 style={{ margin: 0, fontSize: '1.125rem' }}>{editingGoalId ? 'Edit Goal' : 'Create Goal'}</h3>
+                <button className="modal-close" onClick={() => setGoalModalOpen(false)}><X size={18} /></button>
+              </div>
+            </div>
+            <div className="modal-body" style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+              <div>
+                <label style={{ display: 'block', fontSize: '0.8125rem', marginBottom: '0.5rem', color: 'hsl(var(--fg-muted))' }}>Goal Name</label>
+                <input type="text" className="input-field" placeholder="e.g. New Laptop" value={newGoalName} onChange={e => setNewGoalName(e.target.value)} />
+              </div>
+              <div>
+                <label style={{ display: 'block', fontSize: '0.8125rem', marginBottom: '0.5rem', color: 'hsl(var(--fg-muted))' }}>Target Amount (₹)</label>
+                <input type="number" className="input-field" placeholder="e.g. 100000" value={newGoalTarget} onChange={e => setNewGoalTarget(e.target.value)} />
+              </div>
+              <div>
+                <label style={{ display: 'block', fontSize: '0.8125rem', marginBottom: '0.5rem', color: 'hsl(var(--fg-muted))' }}>Currently Saved (₹)</label>
+                <input type="number" className="input-field" placeholder="e.g. 20000" value={newGoalCurrent} onChange={e => setNewGoalCurrent(e.target.value)} />
+              </div>
+            </div>
+            <div className="modal-actions">
+              <button className="btn btn-outline" onClick={() => setGoalModalOpen(false)}>Cancel</button>
+              <button className="btn btn-primary" onClick={handleSaveGoal}>Save Goal</button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* ═══ CONFIRMATION MODAL ═══ */}
+      {confirmModal.open && (
+        <div className="modal-overlay" onClick={() => setConfirmModal({ ...confirmModal, open: false })}>
+          <div className="modal-dialog" onClick={e => e.stopPropagation()} style={{ maxWidth: '350px' }}>
+            <div className="modal-top">
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                <h3 style={{ margin: 0, fontSize: '1.125rem', color: 'hsl(var(--rose))' }}>{confirmModal.title}</h3>
+                <button className="modal-close" onClick={() => setConfirmModal({ ...confirmModal, open: false })}><X size={18} /></button>
+              </div>
+            </div>
+            <div className="modal-body">
+              <p style={{ margin: 0, fontSize: '0.875rem', color: 'hsl(var(--fg-muted))', lineHeight: '1.5' }}>
+                {confirmModal.message}
+              </p>
+            </div>
+            <div className="modal-actions">
+              <button className="btn btn-outline" onClick={() => setConfirmModal({ ...confirmModal, open: false })}>Cancel</button>
+              <button className="btn" style={{ background: 'hsl(var(--rose))', color: 'white', border: '1px solid hsl(var(--rose))' }} onClick={() => {
+                if (confirmModal.onConfirm) confirmModal.onConfirm();
+                setConfirmModal({ ...confirmModal, open: false });
+              }}>Delete</button>
             </div>
           </div>
         </div>

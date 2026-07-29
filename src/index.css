@@ -232,6 +232,48 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* ═══════════════════════════════════════════════
+   BOTTOM NAVIGATION (Mobile)
+   ═══════════════════════════════════════════════ */
+.bottom-nav {
+  display: flex;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 65px;
+  background: hsla(var(--surface), 0.85);
+  backdrop-filter: blur(24px) saturate(1.2);
+  -webkit-backdrop-filter: blur(24px) saturate(1.2);
+  border-top: 1px solid hsla(var(--border), 0.5);
+  justify-content: space-around;
+  align-items: center;
+  z-index: 50;
+}
+
+.bottom-nav-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.25rem;
+  color: hsl(var(--fg-dim));
+  font-size: 0.625rem;
+  font-weight: 500;
+  cursor: pointer;
+  flex: 1;
+  height: 100%;
+  transition: color 0.15s;
+}
+
+.bottom-nav-item.active {
+  color: hsl(var(--primary));
+}
+
+@media (min-width: 1024px) {
+  .bottom-nav { display: none; }
+}
+
+/* ═══════════════════════════════════════════════
    MAIN CONTENT AREA
    ═══════════════════════════════════════════════ */
 .main-area {
@@ -239,6 +281,11 @@ h1, h2, h3, h4, h5, h6 {
   min-width: 0;
   display: flex;
   flex-direction: column;
+  padding-bottom: 65px; /* space for mobile nav */
+}
+
+@media (min-width: 1024px) {
+  .main-area { padding-bottom: 0; }
 }
 
 /* Top Bar */
@@ -667,8 +714,10 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .modal-dialog {
-  background: hsl(var(--surface));
-  border: 1px solid hsl(var(--border));
+  background: hsla(var(--surface), 0.5);
+  backdrop-filter: blur(24px) saturate(1.2);
+  -webkit-backdrop-filter: blur(24px) saturate(1.2);
+  border: 1px solid hsla(var(--border), 0.6);
   border-radius: calc(var(--radius) + 4px);
   width: 92%;
   max-width: 480px;
@@ -713,8 +762,10 @@ h1, h2, h3, h4, h5, h6 {
 
 .textarea-field {
   width: 100%;
-  background: hsl(var(--bg));
-  border: 1px solid hsl(var(--border));
+  background: hsla(var(--bg), 0.4);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid hsla(var(--border), 0.6);
   border-radius: var(--radius);
   padding: 0.875rem 1rem;
   color: hsl(var(--fg));
@@ -736,11 +787,12 @@ h1, h2, h3, h4, h5, h6 {
   box-shadow: 0 0 0 3px hsla(var(--primary), 0.1);
 }
 
-/* Input field */
 .input-field {
   width: 100%;
-  background: hsl(var(--bg));
-  border: 1px solid hsl(var(--border));
+  background: hsla(var(--bg), 0.4);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid hsla(var(--border), 0.6);
   border-radius: var(--radius);
   padding: 0.625rem 0.875rem;
   color: hsl(var(--fg));
