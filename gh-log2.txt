@@ -1,0 +1,740 @@
+﻿2026-07-29T16:40:56.0251145Z ##[debug]Starting: build
+2026-07-29T16:40:56.0273081Z ##[debug]Cleaning runner temp folder: /home/runner/work/_temp
+2026-07-29T16:40:56.0400041Z ##[debug]Starting: Set up job
+2026-07-29T16:40:56.0401375Z Current runner version: '2.336.0'
+2026-07-29T16:40:56.0422104Z ##[group]Runner Image Provisioner
+2026-07-29T16:40:56.0422908Z Hosted Compute Agent
+2026-07-29T16:40:56.0423570Z Version: 20260707.563
+2026-07-29T16:40:56.0424250Z Commit: 02667638d2b423fbc733a8e32a88b44996a3ba6e
+2026-07-29T16:40:56.0424968Z Build Date: 2026-07-07T19:33:50Z
+2026-07-29T16:40:56.0425699Z Worker ID: {a873dd88-54de-4c6b-abe9-82ce9d8d5b96}
+2026-07-29T16:40:56.0426415Z Azure Region: westus
+2026-07-29T16:40:56.0426982Z ##[endgroup]
+2026-07-29T16:40:56.0428401Z ##[group]Operating System
+2026-07-29T16:40:56.0429027Z Ubuntu
+2026-07-29T16:40:56.0429833Z 24.04.4
+2026-07-29T16:40:56.0430382Z LTS
+2026-07-29T16:40:56.0430923Z ##[endgroup]
+2026-07-29T16:40:56.0431576Z ##[group]Runner Image
+2026-07-29T16:40:56.0432227Z Image: ubuntu-24.04
+2026-07-29T16:40:56.0433028Z Version: 20260720.247.2
+2026-07-29T16:40:56.0434172Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20260720.247/images/ubuntu/Ubuntu2404-Readme.md
+2026-07-29T16:40:56.0435661Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20260720.247
+2026-07-29T16:40:56.0436610Z ##[endgroup]
+2026-07-29T16:40:56.0438137Z ##[group]GITHUB_TOKEN Permissions
+2026-07-29T16:40:56.0440363Z Contents: read
+2026-07-29T16:40:56.0440967Z Metadata: read
+2026-07-29T16:40:56.0441677Z Packages: read
+2026-07-29T16:40:56.0442227Z ##[endgroup]
+2026-07-29T16:40:56.0444211Z Secret source: Actions
+2026-07-29T16:40:56.0445542Z ##[debug]Primary repository: KernelKnight08/personal-finance-tracker
+2026-07-29T16:40:56.0446401Z Prepare workflow directory
+2026-07-29T16:40:56.0515983Z ##[debug]Creating pipeline directory: '/home/runner/work/personal-finance-tracker'
+2026-07-29T16:40:56.0520501Z ##[debug]Creating workspace directory: '/home/runner/work/personal-finance-tracker/personal-finance-tracker'
+2026-07-29T16:40:56.0522550Z ##[debug]Update context data
+2026-07-29T16:40:56.0526373Z ##[debug]Evaluating job-level environment variables
+2026-07-29T16:40:56.0760793Z ##[debug]Evaluating job container
+2026-07-29T16:40:56.0764110Z ##[debug]Evaluating job service containers
+2026-07-29T16:40:56.0767324Z ##[debug]Evaluating job defaults
+2026-07-29T16:40:56.0797094Z Prepare all required actions
+2026-07-29T16:40:56.0846942Z Getting action download info
+2026-07-29T16:40:56.4604039Z Download action repository 'actions/checkout@v4' (SHA:11d5960a326750d5838078e36cf38b85af677262)
+2026-07-29T16:40:56.8021415Z ##[debug]Download 'https://codeload.github.com/actions/checkout/tar.gz/11d5960a326750d5838078e36cf38b85af677262' to '/home/runner/work/_actions/_temp_409b2981-89d9-42f5-b77b-7c2aa1af5370/2a63cf98-8c3a-495c-b771-7d9da30210bb.tar.gz'
+2026-07-29T16:40:56.9197961Z ##[debug]Unwrap 'checkout-11d5960a326750d5838078e36cf38b85af677262' to '/home/runner/work/_actions/actions/checkout/v4'
+2026-07-29T16:40:56.9329821Z ##[debug]Archive '/home/runner/work/_actions/_temp_409b2981-89d9-42f5-b77b-7c2aa1af5370/2a63cf98-8c3a-495c-b771-7d9da30210bb.tar.gz' has been unzipped into '/home/runner/work/_actions/actions/checkout/v4'.
+2026-07-29T16:40:56.9428082Z Download action repository 'actions/setup-node@v4' (SHA:49933ea5288caeca8642d1e84afbd3f7d6820020)
+2026-07-29T16:40:56.9475783Z ##[debug]Copied action archive '/opt/actionarchivecache/actions_setup-node/49933ea5288caeca8642d1e84afbd3f7d6820020.tar.gz' to '/home/runner/work/_actions/_temp_9855e355-a328-4389-ade5-45f3234d7bab/16de2082-734b-48ab-bd32-c874df198d28.tar.gz'
+2026-07-29T16:40:57.0081929Z ##[debug]Unwrap 'actions-setup-node-49933ea' to '/home/runner/work/_actions/actions/setup-node/v4'
+2026-07-29T16:40:57.0334477Z ##[debug]Archive '/home/runner/work/_actions/_temp_9855e355-a328-4389-ade5-45f3234d7bab/16de2082-734b-48ab-bd32-c874df198d28.tar.gz' has been unzipped into '/home/runner/work/_actions/actions/setup-node/v4'.
+2026-07-29T16:40:57.0381934Z Download action repository 'actions/setup-java@v4' (SHA:c1e323688fd81a25caa38c78aa6df2d33d3e20d9)
+2026-07-29T16:40:57.4486815Z ##[debug]Download 'https://codeload.github.com/actions/setup-java/tar.gz/c1e323688fd81a25caa38c78aa6df2d33d3e20d9' to '/home/runner/work/_actions/_temp_e4ff767c-72e8-4e5e-9a44-f7ea7dc13245/b8c8899b-014b-482b-8aa1-72ed33c0bc47.tar.gz'
+2026-07-29T16:40:57.5357437Z ##[debug]Unwrap 'setup-java-c1e323688fd81a25caa38c78aa6df2d33d3e20d9' to '/home/runner/work/_actions/actions/setup-java/v4'
+2026-07-29T16:40:57.5708404Z ##[debug]Archive '/home/runner/work/_actions/_temp_e4ff767c-72e8-4e5e-9a44-f7ea7dc13245/b8c8899b-014b-482b-8aa1-72ed33c0bc47.tar.gz' has been unzipped into '/home/runner/work/_actions/actions/setup-java/v4'.
+2026-07-29T16:40:57.5864606Z Download action repository 'actions/upload-artifact@v4' (SHA:ea165f8d65b6e75b540449e92b4886f43607fa02)
+2026-07-29T16:40:57.5922913Z ##[debug]Copied action archive '/opt/actionarchivecache/actions_upload-artifact/ea165f8d65b6e75b540449e92b4886f43607fa02.tar.gz' to '/home/runner/work/_actions/_temp_fc48d7a1-0e8b-48ce-bacd-cda89b9faf60/8b56c080-80c2-4a80-b104-18bed990daa8.tar.gz'
+2026-07-29T16:40:57.6645437Z ##[debug]Unwrap 'actions-upload-artifact-ea165f8' to '/home/runner/work/_actions/actions/upload-artifact/v4'
+2026-07-29T16:40:57.6940595Z ##[debug]Archive '/home/runner/work/_actions/_temp_fc48d7a1-0e8b-48ce-bacd-cda89b9faf60/8b56c080-80c2-4a80-b104-18bed990daa8.tar.gz' has been unzipped into '/home/runner/work/_actions/actions/upload-artifact/v4'.
+2026-07-29T16:40:57.7011271Z ##[debug]action.yml for action: '/home/runner/work/_actions/actions/checkout/v4/action.yml'.
+2026-07-29T16:40:57.7890463Z ##[debug]action.yml for action: '/home/runner/work/_actions/actions/setup-node/v4/action.yml'.
+2026-07-29T16:40:57.8003595Z ##[debug]action.yml for action: '/home/runner/work/_actions/actions/setup-java/v4/action.yml'.
+2026-07-29T16:40:57.8153055Z ##[debug]action.yml for action: '/home/runner/work/_actions/actions/upload-artifact/v4/action.yml'.
+2026-07-29T16:40:57.8303786Z ##[debug]Set step '__actions_checkout' display name to: 'Checkout code'
+2026-07-29T16:40:57.8310056Z ##[debug]Set step '__actions_setup-node' display name to: 'Set up Node.js'
+2026-07-29T16:40:57.8314744Z ##[debug]Set step '__actions_setup-java' display name to: 'Set up Java'
+2026-07-29T16:40:57.8319535Z ##[debug]Set step '__run' display name to: 'Install NPM dependencies'
+2026-07-29T16:40:57.8324507Z ##[debug]Set step '__run_2' display name to: 'Build Web App'
+2026-07-29T16:40:57.8328650Z ##[debug]Set step '__run_3' display name to: 'Sync Capacitor'
+2026-07-29T16:40:57.8333666Z ##[debug]Set step '__run_4' display name to: 'Build APK with Gradle'
+2026-07-29T16:40:57.8338123Z ##[debug]Set step '__actions_upload-artifact' display name to: 'Upload APK'
+2026-07-29T16:40:57.8340265Z Complete job name: build
+2026-07-29T16:40:57.8412792Z ##[debug]Collect running processes for tracking orphan processes.
+2026-07-29T16:40:57.8678189Z ##[debug]Finishing: Set up job
+2026-07-29T16:40:57.8866644Z ##[debug]Evaluating condition for step: 'Checkout code'
+2026-07-29T16:40:57.8917354Z ##[debug]Evaluating: success()
+2026-07-29T16:40:57.8925642Z ##[debug]Evaluating success:
+2026-07-29T16:40:57.8944706Z ##[debug]=> true
+2026-07-29T16:40:57.8951988Z ##[debug]Result: true
+2026-07-29T16:40:57.8979857Z ##[debug]Starting: Checkout code
+2026-07-29T16:40:57.9092354Z ##[debug]Register post job cleanup for action: actions/checkout@v4
+2026-07-29T16:40:57.9216669Z ##[debug]Loading inputs
+2026-07-29T16:40:57.9230404Z ##[debug]Evaluating: github.repository
+2026-07-29T16:40:57.9232282Z ##[debug]Evaluating Index:
+2026-07-29T16:40:57.9234753Z ##[debug]..Evaluating github:
+2026-07-29T16:40:57.9236491Z ##[debug]..=> Object
+2026-07-29T16:40:57.9242928Z ##[debug]..Evaluating String:
+2026-07-29T16:40:57.9244392Z ##[debug]..=> 'repository'
+2026-07-29T16:40:57.9249089Z ##[debug]=> 'KernelKnight08/personal-finance-tracker'
+2026-07-29T16:40:57.9252005Z ##[debug]Result: 'KernelKnight08/personal-finance-tracker'
+2026-07-29T16:40:57.9260048Z ##[debug]Evaluating: github.token
+2026-07-29T16:40:57.9261932Z ##[debug]Evaluating Index:
+2026-07-29T16:40:57.9262956Z ##[debug]..Evaluating github:
+2026-07-29T16:40:57.9263992Z ##[debug]..=> Object
+2026-07-29T16:40:57.9264935Z ##[debug]..Evaluating String:
+2026-07-29T16:40:57.9265932Z ##[debug]..=> 'token'
+2026-07-29T16:40:57.9275237Z ##[debug]=> '***'
+2026-07-29T16:40:57.9284423Z ##[debug]Result: '***'
+2026-07-29T16:40:57.9344728Z ##[debug]Loading env
+2026-07-29T16:40:57.9441220Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+2026-07-29T16:40:57.9453091Z ##[group]Run actions/checkout@v4
+2026-07-29T16:40:57.9454632Z with:
+2026-07-29T16:40:57.9455768Z   repository: KernelKnight08/personal-finance-tracker
+2026-07-29T16:40:57.9465216Z   token: ***
+2026-07-29T16:40:57.9466154Z   ssh-strict: true
+2026-07-29T16:40:57.9467159Z   ssh-user: git
+2026-07-29T16:40:57.9468237Z   persist-credentials: true
+2026-07-29T16:40:57.9469316Z   clean: true
+2026-07-29T16:40:57.9470525Z   sparse-checkout-cone-mode: true
+2026-07-29T16:40:57.9471686Z   fetch-depth: 1
+2026-07-29T16:40:57.9472671Z   fetch-tags: false
+2026-07-29T16:40:57.9473708Z   show-progress: true
+2026-07-29T16:40:57.9474697Z   lfs: false
+2026-07-29T16:40:57.9475606Z   submodules: false
+2026-07-29T16:40:57.9476666Z   set-safe-directory: true
+2026-07-29T16:40:57.9477811Z   allow-unsafe-pr-checkout: false
+2026-07-29T16:40:57.9479340Z ##[endgroup]
+2026-07-29T16:40:58.0442041Z ##[debug]GITHUB_WORKSPACE = '/home/runner/work/personal-finance-tracker/personal-finance-tracker'
+2026-07-29T16:40:58.0447416Z ##[debug]qualified repository = 'KernelKnight08/personal-finance-tracker'
+2026-07-29T16:40:58.0450780Z ##[debug]ref = 'refs/heads/main'
+2026-07-29T16:40:58.0452752Z ##[debug]commit = 'b99e82bb564a32a73a5c1ef9f891b5c992a16085'
+2026-07-29T16:40:58.0454940Z ##[debug]clean = true
+2026-07-29T16:40:58.0456567Z ##[debug]filter = undefined
+2026-07-29T16:40:58.0458274Z ##[debug]fetch depth = 1
+2026-07-29T16:40:58.0460914Z ##[debug]fetch tags = false
+2026-07-29T16:40:58.0463697Z ##[debug]show progress = true
+2026-07-29T16:40:58.0465975Z ##[debug]lfs = false
+2026-07-29T16:40:58.0467552Z ##[debug]submodules = false
+2026-07-29T16:40:58.0469263Z ##[debug]recursive submodules = false
+2026-07-29T16:40:58.0472615Z ##[debug]GitHub Host URL = 
+2026-07-29T16:40:58.0475854Z ##[debug]allow unsafe PR checkout = false
+2026-07-29T16:40:58.0481084Z ::add-matcher::/home/runner/work/_actions/actions/checkout/v4/dist/problem-matcher.json
+2026-07-29T16:40:58.0585389Z ##[debug]Added matchers: 'checkout-git'. Problem matchers scan action output for known warning or error strings and report these inline.
+2026-07-29T16:40:58.0591930Z Syncing repository: KernelKnight08/personal-finance-tracker
+2026-07-29T16:40:58.0594775Z ::group::Getting Git version info
+2026-07-29T16:40:58.0596866Z ##[group]Getting Git version info
+2026-07-29T16:40:58.0598822Z Working directory is '/home/runner/work/personal-finance-tracker/personal-finance-tracker'
+2026-07-29T16:40:58.0601721Z ##[debug]Getting git version
+2026-07-29T16:40:58.0602853Z [command]/usr/bin/git version
+2026-07-29T16:40:58.0649704Z git version 2.54.0
+2026-07-29T16:40:58.0677262Z ##[debug]0
+2026-07-29T16:40:58.0680782Z ##[debug]git version 2.54.0
+2026-07-29T16:40:58.0682703Z ##[debug]
+2026-07-29T16:40:58.0686446Z ##[debug]Set git useragent to: git/2.54.0 (github-actions-checkout)
+2026-07-29T16:40:58.0691273Z ::endgroup::
+2026-07-29T16:40:58.0693061Z ##[endgroup]
+2026-07-29T16:40:58.0701586Z ::add-mask::***
+2026-07-29T16:40:58.0707366Z Temporarily overriding HOME='/home/runner/work/_temp/b27ab4e4-1fde-4d01-975b-a2431f3fb61b' before making global git config changes
+2026-07-29T16:40:58.0713099Z Adding repository directory to the temporary git global config as a safe directory
+2026-07-29T16:40:58.0717352Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/personal-finance-tracker/personal-finance-tracker
+2026-07-29T16:40:58.0758979Z ##[debug]0
+2026-07-29T16:40:58.0762473Z ##[debug]
+2026-07-29T16:40:58.0766015Z Deleting the contents of '/home/runner/work/personal-finance-tracker/personal-finance-tracker'
+2026-07-29T16:40:58.0844125Z ::group::Initializing the repository
+2026-07-29T16:40:58.0846469Z ##[group]Initializing the repository
+2026-07-29T16:40:58.0852156Z [command]/usr/bin/git init /home/runner/work/personal-finance-tracker/personal-finance-tracker
+2026-07-29T16:40:58.0910645Z hint: Using 'master' as the name for the initial branch. This default branch name
+2026-07-29T16:40:58.0912628Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+2026-07-29T16:40:58.0915701Z hint: to use in all of your new repositories, which will suppress this warning,
+2026-07-29T16:40:58.0918120Z hint: call:
+2026-07-29T16:40:58.0918902Z hint:
+2026-07-29T16:40:58.0920302Z hint: 	git config --global init.defaultBranch <name>
+2026-07-29T16:40:58.0921549Z hint:
+2026-07-29T16:40:58.0922665Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+2026-07-29T16:40:58.0924506Z hint: 'development'. The just-created branch can be renamed via this command:
+2026-07-29T16:40:58.0925943Z hint:
+2026-07-29T16:40:58.0926831Z hint: 	git branch -m <name>
+2026-07-29T16:40:58.0928207Z hint:
+2026-07-29T16:40:58.0929941Z hint: Disable this message with "git config set advice.defaultBranchName false"
+2026-07-29T16:40:58.0934144Z Initialized empty Git repository in /home/runner/work/personal-finance-tracker/personal-finance-tracker/.git/
+2026-07-29T16:40:58.0937462Z ##[debug]0
+2026-07-29T16:40:58.0940044Z ##[debug]Initialized empty Git repository in /home/runner/work/personal-finance-tracker/personal-finance-tracker/.git/
+2026-07-29T16:40:58.0942071Z ##[debug]
+2026-07-29T16:40:58.0943578Z [command]/usr/bin/git remote add origin https://github.com/KernelKnight08/personal-finance-tracker
+2026-07-29T16:40:58.1017072Z ##[debug]0
+2026-07-29T16:40:58.1023144Z ##[debug]
+2026-07-29T16:40:58.1025541Z ::endgroup::
+2026-07-29T16:40:58.1026939Z ##[endgroup]
+2026-07-29T16:40:58.1029770Z ::group::Disabling automatic garbage collection
+2026-07-29T16:40:58.1031978Z ##[group]Disabling automatic garbage collection
+2026-07-29T16:40:58.1049388Z [command]/usr/bin/git config --local gc.auto 0
+2026-07-29T16:40:58.1107462Z ##[debug]0
+2026-07-29T16:40:58.1116874Z ##[debug]
+2026-07-29T16:40:58.1119667Z ::endgroup::
+2026-07-29T16:40:58.1120993Z ##[endgroup]
+2026-07-29T16:40:58.1123458Z ::group::Setting up auth
+2026-07-29T16:40:58.1124980Z ##[group]Setting up auth
+2026-07-29T16:40:58.1130042Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-07-29T16:40:58.1147893Z ##[debug]1
+2026-07-29T16:40:58.1162687Z ##[debug]
+2026-07-29T16:40:58.1167735Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-07-29T16:40:58.1664133Z ##[debug]0
+2026-07-29T16:40:58.1667118Z ##[debug]
+2026-07-29T16:40:58.1674740Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-07-29T16:40:58.1707399Z ##[debug]1
+2026-07-29T16:40:58.1709984Z ##[debug]
+2026-07-29T16:40:58.1715783Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-07-29T16:40:58.1933285Z ##[debug]0
+2026-07-29T16:40:58.1935677Z ##[debug]
+2026-07-29T16:40:58.1940472Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-07-29T16:40:58.1972540Z ##[debug]1
+2026-07-29T16:40:58.1975011Z ##[debug]
+2026-07-29T16:40:58.1978205Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-07-29T16:40:58.2195061Z ##[debug]0
+2026-07-29T16:40:58.2197535Z ##[debug]
+2026-07-29T16:40:58.2205479Z [command]/usr/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***
+2026-07-29T16:40:58.2236074Z ##[debug]0
+2026-07-29T16:40:58.2238595Z ##[debug]
+2026-07-29T16:40:58.2244764Z ::endgroup::
+2026-07-29T16:40:58.2246252Z ##[endgroup]
+2026-07-29T16:40:58.2249090Z ::group::Fetching the repository
+2026-07-29T16:40:58.2251348Z ##[group]Fetching the repository
+2026-07-29T16:40:58.2259241Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +b99e82bb564a32a73a5c1ef9f891b5c992a16085:refs/remotes/origin/main
+2026-07-29T16:40:58.8837752Z From https://github.com/KernelKnight08/personal-finance-tracker
+2026-07-29T16:40:58.8840428Z  * [new ref]         b99e82bb564a32a73a5c1ef9f891b5c992a16085 -> origin/main
+2026-07-29T16:40:58.8877219Z ##[debug]0
+2026-07-29T16:40:58.8878049Z ##[debug]
+2026-07-29T16:40:58.8878804Z ::endgroup::
+2026-07-29T16:40:58.8879289Z ##[endgroup]
+2026-07-29T16:40:58.8880373Z ::group::Determining the checkout info
+2026-07-29T16:40:58.8881026Z ##[group]Determining the checkout info
+2026-07-29T16:40:58.8881907Z ::endgroup::
+2026-07-29T16:40:58.8882382Z ##[endgroup]
+2026-07-29T16:40:58.8887815Z [command]/usr/bin/git sparse-checkout disable
+2026-07-29T16:40:58.8933058Z ##[debug]0
+2026-07-29T16:40:58.8933907Z ##[debug]
+2026-07-29T16:40:58.8938613Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+2026-07-29T16:40:58.8969047Z ##[debug]0
+2026-07-29T16:40:58.8970131Z ##[debug]
+2026-07-29T16:40:58.8974830Z ::group::Checking out the ref
+2026-07-29T16:40:58.8975306Z ##[group]Checking out the ref
+2026-07-29T16:40:58.8975951Z [command]/usr/bin/git checkout --progress --force -B main refs/remotes/origin/main
+2026-07-29T16:40:58.9101943Z Switched to a new branch 'main'
+2026-07-29T16:40:58.9105449Z branch 'main' set up to track 'origin/main'.
+2026-07-29T16:40:58.9110569Z ##[debug]0
+2026-07-29T16:40:58.9111305Z ##[debug]branch 'main' set up to track 'origin/main'.
+2026-07-29T16:40:58.9111734Z ##[debug]
+2026-07-29T16:40:58.9112220Z ::endgroup::
+2026-07-29T16:40:58.9112506Z ##[endgroup]
+2026-07-29T16:40:58.9150278Z ##[debug]0
+2026-07-29T16:40:58.9151150Z ##[debug]commit b99e82bb564a32a73a5c1ef9f891b5c992a16085
+2026-07-29T16:40:58.9151791Z ##[debug]Author: KernelKnight08 <kernelknight08@example.com>
+2026-07-29T16:40:58.9152334Z ##[debug]Date:   Wed Jul 29 22:08:42 2026 +0530
+2026-07-29T16:40:58.9152756Z ##[debug]
+2026-07-29T16:40:58.9153146Z ##[debug]    Fix Node.js version to v22 for Vite 8 compatibility
+2026-07-29T16:40:58.9153792Z ##[debug]
+2026-07-29T16:40:58.9154388Z [command]/usr/bin/git log -1 --format=%H
+2026-07-29T16:40:58.9182080Z b99e82bb564a32a73a5c1ef9f891b5c992a16085
+2026-07-29T16:40:58.9184757Z ##[debug]0
+2026-07-29T16:40:58.9185476Z ##[debug]b99e82bb564a32a73a5c1ef9f891b5c992a16085
+2026-07-29T16:40:58.9185924Z ##[debug]
+2026-07-29T16:40:58.9190532Z ##[debug]Unsetting HOME override
+2026-07-29T16:40:58.9196717Z ::remove-matcher owner=checkout-git::
+2026-07-29T16:40:58.9208553Z ##[debug]Removed matchers: 'checkout-git'
+2026-07-29T16:40:58.9272062Z ##[debug]Node Action run completed with exit code 0
+2026-07-29T16:40:58.9306542Z ##[debug]Save intra-action state isPost = true
+2026-07-29T16:40:58.9307130Z ##[debug]Save intra-action state setSafeDirectory = true
+2026-07-29T16:40:58.9307922Z ##[debug]Save intra-action state repositoryPath = /home/runner/work/personal-finance-tracker/personal-finance-tracker
+2026-07-29T16:40:58.9312637Z ##[debug]Set output commit = b99e82bb564a32a73a5c1ef9f891b5c992a16085
+2026-07-29T16:40:58.9313652Z ##[debug]Set output ref = refs/heads/main
+2026-07-29T16:40:58.9331517Z ##[debug]Finishing: Checkout code
+2026-07-29T16:40:58.9348203Z ##[debug]Evaluating condition for step: 'Set up Node.js'
+2026-07-29T16:40:58.9352839Z ##[debug]Evaluating: success()
+2026-07-29T16:40:58.9353362Z ##[debug]Evaluating success:
+2026-07-29T16:40:58.9354046Z ##[debug]=> true
+2026-07-29T16:40:58.9354615Z ##[debug]Result: true
+2026-07-29T16:40:58.9355870Z ##[debug]Starting: Set up Node.js
+2026-07-29T16:40:58.9390683Z ##[debug]Register post job cleanup for action: actions/setup-node@v4
+2026-07-29T16:40:58.9408111Z ##[debug]Loading inputs
+2026-07-29T16:40:58.9434555Z ##[debug]Evaluating: (((github.server_url == 'https://github.com') && github.token) || '')
+2026-07-29T16:40:58.9435214Z ##[debug]Evaluating Or:
+2026-07-29T16:40:58.9437082Z ##[debug]..Evaluating And:
+2026-07-29T16:40:58.9439082Z ##[debug]....Evaluating Equal:
+2026-07-29T16:40:58.9440745Z ##[debug]......Evaluating Index:
+2026-07-29T16:40:58.9441132Z ##[debug]........Evaluating github:
+2026-07-29T16:40:58.9441525Z ##[debug]........=> Object
+2026-07-29T16:40:58.9441938Z ##[debug]........Evaluating String:
+2026-07-29T16:40:58.9442298Z ##[debug]........=> 'server_url'
+2026-07-29T16:40:58.9442712Z ##[debug]......=> 'https://github.com'
+2026-07-29T16:40:58.9443111Z ##[debug]......Evaluating String:
+2026-07-29T16:40:58.9443478Z ##[debug]......=> 'https://github.com'
+2026-07-29T16:40:58.9446563Z ##[debug]....=> true
+2026-07-29T16:40:58.9447311Z ##[debug]....Evaluating Index:
+2026-07-29T16:40:58.9447686Z ##[debug]......Evaluating github:
+2026-07-29T16:40:58.9448055Z ##[debug]......=> Object
+2026-07-29T16:40:58.9448399Z ##[debug]......Evaluating String:
+2026-07-29T16:40:58.9448741Z ##[debug]......=> 'token'
+2026-07-29T16:40:58.9451878Z ##[debug]....=> '***'
+2026-07-29T16:40:58.9454592Z ##[debug]..=> '***'
+2026-07-29T16:40:58.9457530Z ##[debug]=> '***'
+2026-07-29T16:40:58.9465297Z ##[debug]Expanded: ((('https://github.com' == 'https://github.com') && '***') || '')
+2026-07-29T16:40:58.9468246Z ##[debug]Result: '***'
+2026-07-29T16:40:58.9474861Z ##[debug]Loading env
+2026-07-29T16:40:58.9482435Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+2026-07-29T16:40:58.9484204Z ##[group]Run actions/setup-node@v4
+2026-07-29T16:40:58.9484525Z with:
+2026-07-29T16:40:58.9484779Z   node-version: 22
+2026-07-29T16:40:58.9485056Z   always-auth: false
+2026-07-29T16:40:58.9485337Z   check-latest: false
+2026-07-29T16:40:58.9487910Z   token: ***
+2026-07-29T16:40:58.9488172Z ##[endgroup]
+2026-07-29T16:40:59.0907188Z ##[debug]isExplicit: 
+2026-07-29T16:40:59.0908570Z ##[debug]explicit? false
+2026-07-29T16:40:59.0921939Z ##[debug]isExplicit: 22.23.1
+2026-07-29T16:40:59.0923086Z ##[debug]explicit? true
+2026-07-29T16:40:59.0926767Z ##[debug]isExplicit: 24.18.0
+2026-07-29T16:40:59.0927803Z ##[debug]explicit? true
+2026-07-29T16:40:59.0937154Z ##[debug]evaluating 2 versions
+2026-07-29T16:40:59.0959976Z ##[debug]matched: 22.23.1
+2026-07-29T16:40:59.0961331Z ##[debug]checking cache: /opt/hostedtoolcache/node/22.23.1/x64
+2026-07-29T16:40:59.0962510Z ##[debug]Found tool in cache node 22.23.1 x64
+2026-07-29T16:40:59.0966848Z (node:2324) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+2026-07-29T16:40:59.0968783Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-07-29T16:40:59.0970409Z Found in cache @ /opt/hostedtoolcache/node/22.23.1/x64
+2026-07-29T16:40:59.0978671Z ::group::Environment details
+2026-07-29T16:40:59.0979318Z ##[group]Environment details
+2026-07-29T16:40:59.5694630Z node: v22.23.1
+2026-07-29T16:40:59.5695093Z npm: 10.9.8
+2026-07-29T16:40:59.5695513Z yarn: 1.22.22
+2026-07-29T16:40:59.5696542Z ::endgroup::
+2026-07-29T16:40:59.5696869Z ##[endgroup]
+2026-07-29T16:40:59.5703940Z ##[add-matcher]/home/runner/work/_actions/actions/setup-node/v4/.github/tsc.json
+2026-07-29T16:40:59.5731721Z ##[debug]Added matchers: 'tsc'. Problem matchers scan action output for known warning or error strings and report these inline.
+2026-07-29T16:40:59.5733347Z ##[add-matcher]/home/runner/work/_actions/actions/setup-node/v4/.github/eslint-stylish.json
+2026-07-29T16:40:59.5742118Z ##[debug]Added matchers: 'eslint-stylish'. Problem matchers scan action output for known warning or error strings and report these inline.
+2026-07-29T16:40:59.5743755Z ##[add-matcher]/home/runner/work/_actions/actions/setup-node/v4/.github/eslint-compact.json
+2026-07-29T16:40:59.5746741Z ##[debug]Added matchers: 'eslint-compact'. Problem matchers scan action output for known warning or error strings and report these inline.
+2026-07-29T16:40:59.5773508Z ##[debug]Node Action run completed with exit code 0
+2026-07-29T16:40:59.5777345Z ##[debug]Set output node-version = v22.23.1
+2026-07-29T16:40:59.5779089Z ##[debug]Finishing: Set up Node.js
+2026-07-29T16:40:59.5791600Z ##[debug]Evaluating condition for step: 'Set up Java'
+2026-07-29T16:40:59.5794307Z ##[debug]Evaluating: success()
+2026-07-29T16:40:59.5794887Z ##[debug]Evaluating success:
+2026-07-29T16:40:59.5795494Z ##[debug]=> true
+2026-07-29T16:40:59.5796017Z ##[debug]Result: true
+2026-07-29T16:40:59.5796778Z ##[debug]Starting: Set up Java
+2026-07-29T16:40:59.5844007Z ##[debug]Register post job cleanup for action: actions/setup-java@v4
+2026-07-29T16:40:59.5860729Z ##[debug]Loading inputs
+2026-07-29T16:40:59.5874452Z ##[debug]Evaluating: job.status
+2026-07-29T16:40:59.5874843Z ##[debug]Evaluating Index:
+2026-07-29T16:40:59.5875200Z ##[debug]..Evaluating job:
+2026-07-29T16:40:59.5875565Z ##[debug]..=> Object
+2026-07-29T16:40:59.5875908Z ##[debug]..Evaluating String:
+2026-07-29T16:40:59.5876258Z ##[debug]..=> 'status'
+2026-07-29T16:40:59.5876687Z ##[debug]=> 'success'
+2026-07-29T16:40:59.5877021Z ##[debug]Result: 'success'
+2026-07-29T16:40:59.5879231Z ##[debug]Evaluating: (((github.server_url == 'https://github.com') && github.token) || '')
+2026-07-29T16:40:59.5880185Z ##[debug]Evaluating Or:
+2026-07-29T16:40:59.5880531Z ##[debug]..Evaluating And:
+2026-07-29T16:40:59.5880882Z ##[debug]....Evaluating Equal:
+2026-07-29T16:40:59.5881243Z ##[debug]......Evaluating Index:
+2026-07-29T16:40:59.5881597Z ##[debug]........Evaluating github:
+2026-07-29T16:40:59.5881981Z ##[debug]........=> Object
+2026-07-29T16:40:59.5882343Z ##[debug]........Evaluating String:
+2026-07-29T16:40:59.5882720Z ##[debug]........=> 'server_url'
+2026-07-29T16:40:59.5883126Z ##[debug]......=> 'https://github.com'
+2026-07-29T16:40:59.5883515Z ##[debug]......Evaluating String:
+2026-07-29T16:40:59.5883889Z ##[debug]......=> 'https://github.com'
+2026-07-29T16:40:59.5884276Z ##[debug]....=> true
+2026-07-29T16:40:59.5884595Z ##[debug]....Evaluating Index:
+2026-07-29T16:40:59.5884947Z ##[debug]......Evaluating github:
+2026-07-29T16:40:59.5885299Z ##[debug]......=> Object
+2026-07-29T16:40:59.5885630Z ##[debug]......Evaluating String:
+2026-07-29T16:40:59.5885979Z ##[debug]......=> 'token'
+2026-07-29T16:40:59.5888939Z ##[debug]....=> '***'
+2026-07-29T16:40:59.5892127Z ##[debug]..=> '***'
+2026-07-29T16:40:59.5894941Z ##[debug]=> '***'
+2026-07-29T16:40:59.5898128Z ##[debug]Expanded: ((('https://github.com' == 'https://github.com') && '***') || '')
+2026-07-29T16:40:59.5901428Z ##[debug]Result: '***'
+2026-07-29T16:40:59.5906557Z ##[debug]Loading env
+2026-07-29T16:40:59.5914234Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+2026-07-29T16:40:59.5915754Z ##[group]Run actions/setup-java@v4
+2026-07-29T16:40:59.5916094Z with:
+2026-07-29T16:40:59.5916368Z   distribution: temurin
+2026-07-29T16:40:59.5916667Z   java-version: 17
+2026-07-29T16:40:59.5916952Z   java-package: jdk
+2026-07-29T16:40:59.5917248Z   check-latest: false
+2026-07-29T16:40:59.5917542Z   server-id: github
+2026-07-29T16:40:59.5917839Z   server-username: GITHUB_ACTOR
+2026-07-29T16:40:59.5918178Z   server-password: GITHUB_TOKEN
+2026-07-29T16:40:59.5918516Z   overwrite-settings: true
+2026-07-29T16:40:59.5918832Z   job-status: success
+2026-07-29T16:40:59.5921948Z   token: ***
+2026-07-29T16:40:59.5922232Z ##[endgroup]
+2026-07-29T16:40:59.7531112Z ::group::Installed distributions
+2026-07-29T16:40:59.7531874Z ##[group]Installed distributions
+2026-07-29T16:40:59.7563411Z ##[debug]isExplicit: 11.0.31-11
+2026-07-29T16:40:59.7564074Z ##[debug]explicit? true
+2026-07-29T16:40:59.7568539Z ##[debug]isExplicit: 17.0.19-10
+2026-07-29T16:40:59.7569256Z ##[debug]explicit? true
+2026-07-29T16:40:59.7573103Z ##[debug]isExplicit: 21.0.11-10
+2026-07-29T16:40:59.7574440Z ##[debug]explicit? true
+2026-07-29T16:40:59.7577991Z ##[debug]isExplicit: 25.0.3-9
+2026-07-29T16:40:59.7579354Z ##[debug]explicit? true
+2026-07-29T16:40:59.7583905Z ##[debug]isExplicit: 8.0.492-9
+2026-07-29T16:40:59.7584843Z ##[debug]explicit? true
+2026-07-29T16:40:59.7602477Z Resolved Java 17.0.19+10 from tool-cache
+2026-07-29T16:40:59.7603228Z Setting Java 17.0.19+10 as the default
+2026-07-29T16:40:59.7609764Z (node:2355) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+2026-07-29T16:40:59.7611984Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-07-29T16:40:59.7613489Z Creating toolchains.xml for JDK version 17 from temurin
+2026-07-29T16:40:59.7691715Z Writing to /home/runner/.m2/toolchains.xml
+2026-07-29T16:40:59.7692422Z 
+2026-07-29T16:40:59.7692822Z Java configuration:
+2026-07-29T16:40:59.7693623Z   Distribution: temurin
+2026-07-29T16:40:59.7694429Z   Version: 17.0.19+10
+2026-07-29T16:40:59.7695641Z   Path: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/17.0.19-10/x64
+2026-07-29T16:40:59.7696538Z 
+2026-07-29T16:40:59.7697335Z ::endgroup::
+2026-07-29T16:40:59.7697995Z ##[endgroup]
+2026-07-29T16:40:59.7699978Z ##[add-matcher]/home/runner/work/_actions/actions/setup-java/v4/.github/java.json
+2026-07-29T16:40:59.7704948Z ##[debug]Added matchers: 'java'. Problem matchers scan action output for known warning or error strings and report these inline.
+2026-07-29T16:40:59.7706137Z Creating settings.xml with server-id: github
+2026-07-29T16:40:59.7713161Z Writing to /home/runner/.m2/settings.xml
+2026-07-29T16:40:59.7809030Z ##[debug]Node Action run completed with exit code 0
+2026-07-29T16:40:59.7821288Z ##[debug]JAVA_HOME='/opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/17.0.19-10/x64'
+2026-07-29T16:40:59.7822594Z ##[debug]JAVA_HOME_17_X64='/opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/17.0.19-10/x64'
+2026-07-29T16:40:59.7825212Z ##[debug]Set output distribution = Temurin-Hotspot
+2026-07-29T16:40:59.7826093Z ##[debug]Set output path = /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/17.0.19-10/x64
+2026-07-29T16:40:59.7826961Z ##[debug]Set output version = 17.0.19+10
+2026-07-29T16:40:59.7828620Z ##[debug]Finishing: Set up Java
+2026-07-29T16:40:59.7838592Z ##[debug]Evaluating condition for step: 'Install NPM dependencies'
+2026-07-29T16:40:59.7841075Z ##[debug]Evaluating: success()
+2026-07-29T16:40:59.7841619Z ##[debug]Evaluating success:
+2026-07-29T16:40:59.7842183Z ##[debug]=> true
+2026-07-29T16:40:59.7842701Z ##[debug]Result: true
+2026-07-29T16:40:59.7843447Z ##[debug]Starting: Install NPM dependencies
+2026-07-29T16:40:59.7857649Z ##[debug]Loading inputs
+2026-07-29T16:40:59.7859124Z ##[debug]Loading env
+2026-07-29T16:40:59.7878459Z ##[group]Run npm install
+2026-07-29T16:40:59.7878841Z [36;1mnpm install[0m
+2026-07-29T16:40:59.7942183Z shell: /usr/bin/bash -e {0}
+2026-07-29T16:40:59.7942854Z env:
+2026-07-29T16:40:59.7943613Z   JAVA_HOME: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/17.0.19-10/x64
+2026-07-29T16:40:59.7944870Z   JAVA_HOME_17_X64: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/17.0.19-10/x64
+2026-07-29T16:40:59.7945834Z ##[endgroup]
+2026-07-29T16:40:59.8047968Z ##[debug]/usr/bin/bash -e /home/runner/work/_temp/8b2eedf3-c6d3-4c9d-9148-da1b95ae0cf1.sh
+2026-07-29T16:41:05.2375795Z 
+2026-07-29T16:41:05.2376836Z added 156 packages, and audited 157 packages in 5s
+2026-07-29T16:41:05.2377368Z 
+2026-07-29T16:41:05.2377718Z 21 packages are looking for funding
+2026-07-29T16:41:05.2378305Z   run `npm fund` for details
+2026-07-29T16:41:05.2396818Z 
+2026-07-29T16:41:05.2397483Z found 0 vulnerabilities
+2026-07-29T16:41:05.2893031Z ##[debug]Finishing: Install NPM dependencies
+2026-07-29T16:41:05.2905433Z ##[debug]Evaluating condition for step: 'Build Web App'
+2026-07-29T16:41:05.2908476Z ##[debug]Evaluating: success()
+2026-07-29T16:41:05.2908953Z ##[debug]Evaluating success:
+2026-07-29T16:41:05.2910338Z ##[debug]=> true
+2026-07-29T16:41:05.2910810Z ##[debug]Result: true
+2026-07-29T16:41:05.2911516Z ##[debug]Starting: Build Web App
+2026-07-29T16:41:05.2921905Z ##[debug]Loading inputs
+2026-07-29T16:41:05.2923231Z ##[debug]Loading env
+2026-07-29T16:41:05.2927628Z ##[group]Run npm run build
+2026-07-29T16:41:05.2927889Z [36;1mnpm run build[0m
+2026-07-29T16:41:05.2972837Z shell: /usr/bin/bash -e {0}
+2026-07-29T16:41:05.2973114Z env:
+2026-07-29T16:41:05.2973450Z   JAVA_HOME: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/17.0.19-10/x64
+2026-07-29T16:41:05.2974026Z   JAVA_HOME_17_X64: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/17.0.19-10/x64
+2026-07-29T16:41:05.2974458Z ##[endgroup]
+2026-07-29T16:41:05.3020694Z ##[debug]/usr/bin/bash -e /home/runner/work/_temp/b34671fa-7316-46c9-9165-fcaea882676d.sh
+2026-07-29T16:41:05.3968512Z 
+2026-07-29T16:41:05.3969067Z > personal-finance-tracker@0.0.0 build
+2026-07-29T16:41:05.3969772Z > vite build
+2026-07-29T16:41:05.3969960Z 
+2026-07-29T16:41:05.6349872Z [36mvite v8.1.5 [32mbuilding client environment for production...[36m[39m
+2026-07-29T16:41:05.6493561Z [2K
+2026-07-29T16:41:05.8945196Z transforming...✓ 2358 modules transformed.
+2026-07-29T16:41:05.9580085Z rendering chunks...
+2026-07-29T16:41:06.0505707Z computing gzip size...
+2026-07-29T16:41:06.0600576Z dist/index.html                   0.68 kB │ gzip:   0.41 kB
+2026-07-29T16:41:06.0601602Z dist/assets/index-c0nyiYWG.css   16.76 kB │ gzip:   4.37 kB
+2026-07-29T16:41:06.0602465Z dist/assets/index-ChLRHzfL.js   639.54 kB │ gzip: 184.87 kB
+2026-07-29T16:41:06.0602864Z 
+2026-07-29T16:41:06.0603909Z [32m✓ built in 424ms[39m
+2026-07-29T16:41:06.0611733Z [33m[plugin builtin:vite-reporter] 
+2026-07-29T16:41:06.0612876Z (!) Some chunks are larger than 500 kB after minification. Consider:
+2026-07-29T16:41:06.0613772Z - Using dynamic import() to code-split the application
+2026-07-29T16:41:06.0615140Z - Use build.rolldownOptions.output.codeSplitting to improve chunking: https://rolldown.rs/reference/OutputOptions.codeSplitting
+2026-07-29T16:41:06.0617071Z - Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.[39m
+2026-07-29T16:41:06.0887054Z ##[debug]Finishing: Build Web App
+2026-07-29T16:41:06.0897175Z ##[debug]Evaluating condition for step: 'Sync Capacitor'
+2026-07-29T16:41:06.0899247Z ##[debug]Evaluating: success()
+2026-07-29T16:41:06.0900285Z ##[debug]Evaluating success:
+2026-07-29T16:41:06.0900856Z ##[debug]=> true
+2026-07-29T16:41:06.0901356Z ##[debug]Result: true
+2026-07-29T16:41:06.0902023Z ##[debug]Starting: Sync Capacitor
+2026-07-29T16:41:06.0912345Z ##[debug]Loading inputs
+2026-07-29T16:41:06.0913504Z ##[debug]Loading env
+2026-07-29T16:41:06.0917325Z ##[group]Run npx cap sync android
+2026-07-29T16:41:06.0917618Z [36;1mnpx cap sync android[0m
+2026-07-29T16:41:06.0961856Z shell: /usr/bin/bash -e {0}
+2026-07-29T16:41:06.0962100Z env:
+2026-07-29T16:41:06.0962418Z   JAVA_HOME: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/17.0.19-10/x64
+2026-07-29T16:41:06.0962939Z   JAVA_HOME_17_X64: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/17.0.19-10/x64
+2026-07-29T16:41:06.0963321Z ##[endgroup]
+2026-07-29T16:41:06.1007460Z ##[debug]/usr/bin/bash -e /home/runner/work/_temp/8e0bf9bd-38f1-4226-a595-9eb4990885eb.sh
+2026-07-29T16:41:06.5859928Z ✔ Copying web assets from dist to android/app/src/main/assets/public in 5.57ms
+2026-07-29T16:41:06.5868376Z ✔ Creating capacitor.config.json in android/app/src/main/assets in 617.31μs
+2026-07-29T16:41:06.5910647Z ✔ copy android in 16.83ms
+2026-07-29T16:41:06.5978410Z ✔ Updating Android plugins in 2.09ms
+2026-07-29T16:41:06.6155573Z ✔ update android in 22.25ms
+2026-07-29T16:41:06.6205266Z [info] Sync finished in 0.055s
+2026-07-29T16:41:06.6501350Z ##[debug]Finishing: Sync Capacitor
+2026-07-29T16:41:06.6510554Z ##[debug]Evaluating condition for step: 'Build APK with Gradle'
+2026-07-29T16:41:06.6513001Z ##[debug]Evaluating: success()
+2026-07-29T16:41:06.6513423Z ##[debug]Evaluating success:
+2026-07-29T16:41:06.6513865Z ##[debug]=> true
+2026-07-29T16:41:06.6514233Z ##[debug]Result: true
+2026-07-29T16:41:06.6514815Z ##[debug]Starting: Build APK with Gradle
+2026-07-29T16:41:06.6524356Z ##[debug]Loading inputs
+2026-07-29T16:41:06.6525547Z ##[debug]Loading env
+2026-07-29T16:41:06.6531118Z ##[group]Run cd android
+2026-07-29T16:41:06.6531414Z [36;1mcd android[0m
+2026-07-29T16:41:06.6531650Z [36;1mchmod +x gradlew[0m
+2026-07-29T16:41:06.6531911Z [36;1m./gradlew assembleDebug[0m
+2026-07-29T16:41:06.6576015Z shell: /usr/bin/bash -e {0}
+2026-07-29T16:41:06.6576273Z env:
+2026-07-29T16:41:06.6576602Z   JAVA_HOME: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/17.0.19-10/x64
+2026-07-29T16:41:06.6577162Z   JAVA_HOME_17_X64: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/17.0.19-10/x64
+2026-07-29T16:41:06.6577627Z ##[endgroup]
+2026-07-29T16:41:06.6623432Z ##[debug]/usr/bin/bash -e /home/runner/work/_temp/2db7235b-154c-4d8a-842c-54a471047c39.sh
+2026-07-29T16:41:08.7678741Z Downloading https://services.gradle.org/distributions/gradle-8.14.3-all.zip
+2026-07-29T16:41:14.2665096Z .....................10%.....................20%......................30%.....................40%......................50%.....................60%.....................70%......................80%.....................90%......................100%
+2026-07-29T16:41:18.5620436Z 
+2026-07-29T16:41:18.5626283Z Welcome to Gradle 8.14.3!
+2026-07-29T16:41:18.5626723Z 
+2026-07-29T16:41:18.5627499Z Here are the highlights of this release:
+2026-07-29T16:41:18.5628567Z  - Java 24 support
+2026-07-29T16:41:18.5629719Z  - GraalVM Native Image toolchain selection
+2026-07-29T16:41:18.5630692Z  - Enhancements to test reporting
+2026-07-29T16:41:18.5631572Z  - Build Authoring improvements
+2026-07-29T16:41:18.5632180Z 
+2026-07-29T16:41:18.5632975Z For more details see https://docs.gradle.org/8.14.3/release-notes.html
+2026-07-29T16:41:18.5633763Z 
+2026-07-29T16:41:18.7611552Z Starting a Gradle Daemon (subsequent builds will be faster)
+2026-07-29T16:41:50.5619399Z 
+2026-07-29T16:41:50.5636176Z > Configure project :app
+2026-07-29T16:41:50.5637410Z WARNING: Using flatDir should be avoided because it doesn't support any meta-data formats.
+2026-07-29T16:41:52.8611571Z 
+2026-07-29T16:41:52.8612683Z > Configure project :capacitor-cordova-android-plugins
+2026-07-29T16:41:52.8643438Z WARNING: Using flatDir should be avoided because it doesn't support any meta-data formats.
+2026-07-29T16:41:54.3616932Z 
+2026-07-29T16:41:54.3631280Z > Task :app:preBuild UP-TO-DATE
+2026-07-29T16:41:54.3632403Z > Task :app:preDebugBuild UP-TO-DATE
+2026-07-29T16:41:54.4621083Z > Task :app:mergeDebugNativeDebugMetadata NO-SOURCE
+2026-07-29T16:41:54.5676937Z > Task :capacitor-android:preBuild UP-TO-DATE
+2026-07-29T16:41:54.5678401Z > Task :capacitor-android:preDebugBuild UP-TO-DATE
+2026-07-29T16:41:54.5710549Z > Task :capacitor-cordova-android-plugins:preBuild UP-TO-DATE
+2026-07-29T16:41:54.5750469Z > Task :capacitor-cordova-android-plugins:preDebugBuild UP-TO-DATE
+2026-07-29T16:41:54.5780210Z > Task :app:javaPreCompileDebug
+2026-07-29T16:41:54.5800133Z > Task :capacitor-android:writeDebugAarMetadata
+2026-07-29T16:41:54.5830735Z > Task :capacitor-cordova-android-plugins:writeDebugAarMetadata
+2026-07-29T16:41:54.5860435Z > Task :capacitor-android:processDebugNavigationResources
+2026-07-29T16:41:59.3612211Z > Task :capacitor-cordova-android-plugins:processDebugNavigationResources
+2026-07-29T16:41:59.3613321Z > Task :app:checkDebugAarMetadata
+2026-07-29T16:41:59.3614192Z > Task :app:processDebugNavigationResources
+2026-07-29T16:41:59.6611062Z > Task :app:generateDebugResValues
+2026-07-29T16:41:59.6611803Z > Task :capacitor-android:generateDebugResValues
+2026-07-29T16:41:59.6614116Z > Task :app:compileDebugNavigationResources
+2026-07-29T16:41:59.6615175Z > Task :capacitor-android:generateDebugResources
+2026-07-29T16:41:59.7620993Z > Task :capacitor-android:packageDebugResources
+2026-07-29T16:41:59.7622067Z > Task :capacitor-cordova-android-plugins:generateDebugResValues
+2026-07-29T16:41:59.7640600Z > Task :capacitor-cordova-android-plugins:generateDebugResources
+2026-07-29T16:41:59.8611778Z > Task :capacitor-cordova-android-plugins:packageDebugResources
+2026-07-29T16:41:59.8614720Z > Task :app:mapDebugSourceSetPaths
+2026-07-29T16:41:59.8615559Z > Task :app:generateDebugResources
+2026-07-29T16:42:00.5611083Z > Task :app:packageDebugResources
+2026-07-29T16:42:03.4611350Z > Task :app:mergeDebugResources
+2026-07-29T16:42:03.7620853Z > Task :app:createDebugCompatibleScreenManifests
+2026-07-29T16:42:03.7660454Z > Task :app:extractDeepLinksDebug
+2026-07-29T16:42:03.7690458Z > Task :capacitor-android:extractDeepLinksDebug
+2026-07-29T16:42:03.8626908Z > Task :capacitor-cordova-android-plugins:extractDeepLinksDebug
+2026-07-29T16:42:03.8680992Z > Task :app:parseDebugLocalResources
+2026-07-29T16:42:03.8721899Z > Task :capacitor-android:compileDebugLibraryResources
+2026-07-29T16:42:03.9614965Z > Task :capacitor-cordova-android-plugins:compileDebugLibraryResources
+2026-07-29T16:42:03.9630694Z > Task :capacitor-android:parseDebugLocalResources
+2026-07-29T16:42:03.9631853Z > Task :capacitor-android:processDebugManifest
+2026-07-29T16:42:03.9632950Z > Task :capacitor-cordova-android-plugins:processDebugManifest
+2026-07-29T16:42:03.9634264Z > Task :capacitor-cordova-android-plugins:parseDebugLocalResources
+2026-07-29T16:42:03.9635333Z > Task :capacitor-android:generateDebugRFile
+2026-07-29T16:42:04.0613494Z > Task :app:processDebugMainManifest
+2026-07-29T16:42:04.4612108Z > Task :app:processDebugManifest
+2026-07-29T16:42:04.4612901Z > Task :capacitor-android:javaPreCompileDebug
+2026-07-29T16:42:04.4613587Z > Task :app:processDebugManifestForPackage
+2026-07-29T16:42:04.4614360Z > Task :capacitor-cordova-android-plugins:generateDebugRFile
+2026-07-29T16:42:09.0646799Z > Task :capacitor-android:compileDebugJavaWithJavac FAILED
+2026-07-29T16:42:09.1611174Z 
+2026-07-29T16:42:09.1611631Z 
+2026-07-29T16:42:09.1613425Z [Incubating] Problems report is available at: file:///home/runner/work/personal-finance-tracker/personal-finance-tracker/android/build/reports/problems/problems-report.html
+2026-07-29T16:42:09.1615175Z FAILURE: Build failed with an exception.
+2026-07-29T16:42:09.1615580Z 
+2026-07-29T16:42:09.1615790Z * What went wrong:
+2026-07-29T16:42:09.1616626Z Execution failed for task ':capacitor-android:compileDebugJavaWithJavac'.
+2026-07-29T16:42:09.1617545Z > Java compilation initialization error
+2026-07-29T16:42:09.1618168Z     error: invalid source release: 21
+2026-07-29T16:42:09.1618527Z 
+2026-07-29T16:42:09.1618688Z * Try:
+2026-07-29T16:42:09.1619263Z > Run with --stacktrace option to get the stack trace.
+2026-07-29T16:42:09.1620320Z > Run with --info or --debug option to get more log output.
+2026-07-29T16:42:09.1621043Z > Run with --scan to get full insights.
+2026-07-29T16:42:09.1621740Z > Get more help at https://help.gradle.org.
+2026-07-29T16:42:09.1622142Z 
+2026-07-29T16:42:09.1622353Z BUILD FAILED in 1m
+2026-07-29T16:42:09.1650506Z 37 actionable tasks: 37 executed
+2026-07-29T16:42:09.5520544Z ##[error]Process completed with exit code 1.
+2026-07-29T16:42:09.5533529Z ##[debug]Finishing: Build APK with Gradle
+2026-07-29T16:42:09.5552040Z ##[debug]Evaluating condition for step: 'Upload APK'
+2026-07-29T16:42:09.5553655Z ##[debug]Evaluating: success()
+2026-07-29T16:42:09.5554042Z ##[debug]Evaluating success:
+2026-07-29T16:42:09.5554439Z ##[debug]=> false
+2026-07-29T16:42:09.5554763Z ##[debug]Result: false
+2026-07-29T16:42:09.5581936Z ##[debug]Evaluating condition for step: 'Post Set up Java'
+2026-07-29T16:42:09.5583992Z ##[debug]Evaluating: always()
+2026-07-29T16:42:09.5584364Z ##[debug]Evaluating always:
+2026-07-29T16:42:09.5585086Z ##[debug]=> true
+2026-07-29T16:42:09.5585445Z ##[debug]Result: true
+2026-07-29T16:42:09.5585925Z ##[debug]Starting: Post Set up Java
+2026-07-29T16:42:09.5641791Z ##[debug]Loading inputs
+2026-07-29T16:42:09.5651076Z ##[debug]Evaluating: job.status
+2026-07-29T16:42:09.5651381Z ##[debug]Evaluating Index:
+2026-07-29T16:42:09.5651623Z ##[debug]..Evaluating job:
+2026-07-29T16:42:09.5651871Z ##[debug]..=> Object
+2026-07-29T16:42:09.5652101Z ##[debug]..Evaluating String:
+2026-07-29T16:42:09.5652346Z ##[debug]..=> 'status'
+2026-07-29T16:42:09.5652629Z ##[debug]=> 'failure'
+2026-07-29T16:42:09.5652857Z ##[debug]Result: 'failure'
+2026-07-29T16:42:09.5654489Z ##[debug]Evaluating: (((github.server_url == 'https://github.com') && github.token) || '')
+2026-07-29T16:42:09.5654989Z ##[debug]Evaluating Or:
+2026-07-29T16:42:09.5655238Z ##[debug]..Evaluating And:
+2026-07-29T16:42:09.5655481Z ##[debug]....Evaluating Equal:
+2026-07-29T16:42:09.5655724Z ##[debug]......Evaluating Index:
+2026-07-29T16:42:09.5655974Z ##[debug]........Evaluating github:
+2026-07-29T16:42:09.5656250Z ##[debug]........=> Object
+2026-07-29T16:42:09.5656487Z ##[debug]........Evaluating String:
+2026-07-29T16:42:09.5656762Z ##[debug]........=> 'server_url'
+2026-07-29T16:42:09.5657056Z ##[debug]......=> 'https://github.com'
+2026-07-29T16:42:09.5657360Z ##[debug]......Evaluating String:
+2026-07-29T16:42:09.5657624Z ##[debug]......=> 'https://github.com'
+2026-07-29T16:42:09.5657906Z ##[debug]....=> true
+2026-07-29T16:42:09.5658124Z ##[debug]....Evaluating Index:
+2026-07-29T16:42:09.5658380Z ##[debug]......Evaluating github:
+2026-07-29T16:42:09.5658622Z ##[debug]......=> Object
+2026-07-29T16:42:09.5658852Z ##[debug]......Evaluating String:
+2026-07-29T16:42:09.5659094Z ##[debug]......=> 'token'
+2026-07-29T16:42:09.5662021Z ##[debug]....=> '***'
+2026-07-29T16:42:09.5664687Z ##[debug]..=> '***'
+2026-07-29T16:42:09.5667043Z ##[debug]=> '***'
+2026-07-29T16:42:09.5669928Z ##[debug]Expanded: ((('https://github.com' == 'https://github.com') && '***') || '')
+2026-07-29T16:42:09.5672414Z ##[debug]Result: '***'
+2026-07-29T16:42:09.5676245Z ##[debug]Loading env
+2026-07-29T16:42:09.5681755Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+2026-07-29T16:42:09.5682959Z Post job cleanup.
+2026-07-29T16:42:09.6988589Z (node:2709) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+2026-07-29T16:42:09.6990367Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-07-29T16:42:09.7091809Z ##[debug]Node Action run completed with exit code 0
+2026-07-29T16:42:09.7095845Z ##[debug]Finishing: Post Set up Java
+2026-07-29T16:42:09.7108163Z ##[debug]Evaluating condition for step: 'Post Set up Node.js'
+2026-07-29T16:42:09.7111388Z ##[debug]Evaluating: success()
+2026-07-29T16:42:09.7127935Z ##[debug]Evaluating success:
+2026-07-29T16:42:09.7128810Z ##[debug]=> false
+2026-07-29T16:42:09.7130144Z ##[debug]Result: false
+2026-07-29T16:42:09.7138009Z ##[debug]Evaluating condition for step: 'Post Checkout code'
+2026-07-29T16:42:09.7140279Z ##[debug]Evaluating: always()
+2026-07-29T16:42:09.7140839Z ##[debug]Evaluating always:
+2026-07-29T16:42:09.7141349Z ##[debug]=> true
+2026-07-29T16:42:09.7141860Z ##[debug]Result: true
+2026-07-29T16:42:09.7142520Z ##[debug]Starting: Post Checkout code
+2026-07-29T16:42:09.7219210Z ##[debug]Loading inputs
+2026-07-29T16:42:09.7221297Z ##[debug]Evaluating: github.repository
+2026-07-29T16:42:09.7221793Z ##[debug]Evaluating Index:
+2026-07-29T16:42:09.7222178Z ##[debug]..Evaluating github:
+2026-07-29T16:42:09.7222591Z ##[debug]..=> Object
+2026-07-29T16:42:09.7222957Z ##[debug]..Evaluating String:
+2026-07-29T16:42:09.7223354Z ##[debug]..=> 'repository'
+2026-07-29T16:42:09.7223868Z ##[debug]=> 'KernelKnight08/personal-finance-tracker'
+2026-07-29T16:42:09.7224477Z ##[debug]Result: 'KernelKnight08/personal-finance-tracker'
+2026-07-29T16:42:09.7227086Z ##[debug]Evaluating: github.token
+2026-07-29T16:42:09.7227539Z ##[debug]Evaluating Index:
+2026-07-29T16:42:09.7228119Z ##[debug]..Evaluating github:
+2026-07-29T16:42:09.7228512Z ##[debug]..=> Object
+2026-07-29T16:42:09.7228856Z ##[debug]..Evaluating String:
+2026-07-29T16:42:09.7229233Z ##[debug]..=> 'token'
+2026-07-29T16:42:09.7233790Z ##[debug]=> '***'
+2026-07-29T16:42:09.7238028Z ##[debug]Result: '***'
+2026-07-29T16:42:09.7258565Z ##[debug]Loading env
+2026-07-29T16:42:09.7267131Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+2026-07-29T16:42:09.7269137Z Post job cleanup.
+2026-07-29T16:42:09.8094831Z ##[debug]Getting git version
+2026-07-29T16:42:09.8114261Z [command]/usr/bin/git version
+2026-07-29T16:42:09.8191266Z git version 2.54.0
+2026-07-29T16:42:09.8213289Z ##[debug]0
+2026-07-29T16:42:09.8215974Z ##[debug]git version 2.54.0
+2026-07-29T16:42:09.8216316Z ##[debug]
+2026-07-29T16:42:09.8217389Z ##[debug]Set git useragent to: git/2.54.0 (github-actions-checkout)
+2026-07-29T16:42:09.8218617Z ::add-mask::***
+2026-07-29T16:42:09.8234503Z Temporarily overriding HOME='/home/runner/work/_temp/3b2072c5-47d7-4755-b1ce-51b042fde0cd' before making global git config changes
+2026-07-29T16:42:09.8235692Z Adding repository directory to the temporary git global config as a safe directory
+2026-07-29T16:42:09.8241601Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/personal-finance-tracker/personal-finance-tracker
+2026-07-29T16:42:09.8275052Z ##[debug]0
+2026-07-29T16:42:09.8275748Z ##[debug]
+2026-07-29T16:42:09.8283813Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-07-29T16:42:09.8314492Z ##[debug]1
+2026-07-29T16:42:09.8315165Z ##[debug]
+2026-07-29T16:42:09.8320579Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-07-29T16:42:09.8564769Z ##[debug]0
+2026-07-29T16:42:09.8565484Z ##[debug]
+2026-07-29T16:42:09.8572616Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-07-29T16:42:09.8601645Z http.https://github.com/.extraheader
+2026-07-29T16:42:09.8608080Z ##[debug]0
+2026-07-29T16:42:09.8608892Z ##[debug]http.https://github.com/.extraheader
+2026-07-29T16:42:09.8609714Z ##[debug]
+2026-07-29T16:42:09.8614602Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader
+2026-07-29T16:42:09.8643237Z ##[debug]0
+2026-07-29T16:42:09.8643819Z ##[debug]
+2026-07-29T16:42:09.8650479Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-07-29T16:42:09.8897683Z ##[debug]0
+2026-07-29T16:42:09.8899059Z ##[debug]
+2026-07-29T16:42:09.8906406Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-07-29T16:42:09.8937551Z ##[debug]1
+2026-07-29T16:42:09.8938639Z ##[debug]
+2026-07-29T16:42:09.8946793Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-07-29T16:42:09.9200909Z ##[debug]0
+2026-07-29T16:42:09.9201304Z ##[debug]
+2026-07-29T16:42:09.9203359Z ##[debug]Unsetting HOME override
+2026-07-29T16:42:09.9277824Z ##[debug]Node Action run completed with exit code 0
+2026-07-29T16:42:09.9281907Z ##[debug]Finishing: Post Checkout code
+2026-07-29T16:42:09.9336116Z ##[debug]Starting: Complete job
+2026-07-29T16:42:09.9337999Z Uploading runner diagnostic logs
+2026-07-29T16:42:09.9349931Z ##[debug]Starting diagnostic file upload.
+2026-07-29T16:42:09.9350344Z ##[debug]Setting up diagnostic log folders.
+2026-07-29T16:42:09.9352087Z ##[debug]Creating diagnostic log files folder.
+2026-07-29T16:42:09.9359970Z ##[debug]Copying 1 worker diagnostic logs.
+2026-07-29T16:42:09.9367477Z ##[debug]Copying 1 runner diagnostic logs.
+2026-07-29T16:42:09.9368551Z ##[debug]Zipping diagnostic files.
+2026-07-29T16:42:09.9447175Z ##[debug]Uploading diagnostic metadata file.
+2026-07-29T16:42:09.9475309Z ##[debug]Diagnostic file upload complete.
+2026-07-29T16:42:09.9475848Z Completed runner diagnostic log upload
+2026-07-29T16:42:09.9476132Z Cleaning up orphan processes
+2026-07-29T16:42:09.9760394Z Terminate orphan process: pid (2490) (java)
+2026-07-29T16:42:09.9800707Z ##[warning]Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/checkout@v4, actions/setup-java@v4, actions/setup-node@v4. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+2026-07-29T16:42:09.9802748Z ##[debug]Finishing: Complete job
+2026-07-29T16:42:09.9833339Z ##[debug]Finishing: build
