@@ -45,30 +45,7 @@ import {
 } from 'recharts';
 import { parseBankSMS } from './utils/smsParser';
 
-/* ── Initial Mock Data ────────────────────────── */
-const seedTransactions = [
-  { id: 1, name: 'Croma Retail',    category: 'Shopping',      amount: -15990, date: 'Jul 28, 2026', time: '2:45 PM',  type: 'expense', status: 'Completed' },
-  { id: 2, name: 'Client Payment',  category: 'Freelance',     amount: 25000,  date: 'Jul 27, 2026', time: '10:20 AM', type: 'income',  status: 'Completed' },
-  { id: 3, name: 'D-Mart',          category: 'Groceries',     amount: -4550,  date: 'Jul 26, 2026', time: '4:30 PM',  type: 'expense', status: 'Completed' },
-  { id: 4, name: 'Disney+ Hotstar', category: 'Entertainment', amount: -899,   date: 'Jul 25, 2026', time: '9:00 AM',  type: 'expense', status: 'Completed' },
-  { id: 5, name: 'Ola Cabs',        category: 'Transport',     amount: -350,   date: 'Jul 24, 2026', time: '8:15 PM',  type: 'expense', status: 'Completed' },
-  { id: 6, name: 'Zomato',          category: 'Food',          amount: -1250,  date: 'Jul 23, 2026', time: '1:15 PM',  type: 'expense', status: 'Completed' },
-  { id: 7, name: 'Salary Deposit',  category: 'Salary',        amount: 85000,  date: 'Jul 20, 2026', time: '12:00 PM', type: 'income',  status: 'Completed' },
-  { id: 8, name: 'Reliance Fresh',  category: 'Groceries',     amount: -2200,  date: 'Jul 19, 2026', time: '6:30 PM',  type: 'expense', status: 'Completed' },
-  { id: 9, name: 'Amazon India',    category: 'Shopping',      amount: -4500,  date: 'Jul 18, 2026', time: '10:00 AM', type: 'expense', status: 'Completed' },
-  { id: 10, name: 'Electricity Bill',category: 'Utilities',    amount: -3200,  date: 'Jul 15, 2026', time: '9:00 AM',  type: 'expense', status: 'Pending' },
-  { id: 11, name: 'Jio Recharge',   category: 'Utilities',     amount: -749,   date: 'Jul 12, 2026', time: '2:30 PM',  type: 'expense', status: 'Completed' },
-  { id: 12, name: 'BookMyShow',     category: 'Entertainment', amount: -1100,  date: 'Jul 10, 2026', time: '8:45 PM',  type: 'expense', status: 'Completed' },
-];
-
-const seedBudgets = [
-  { id: 1, category: 'Groceries', limit: 10000 },
-  { id: 2, category: 'Shopping', limit: 15000 },
-  { id: 3, category: 'Entertainment', limit: 3000 },
-  { id: 4, category: 'Transport', limit: 4000 },
-  { id: 5, category: 'Food', limit: 5000 }
-];
-
+/* ── Initial Data ─────────────────────────────── */
 const defaultCategories = [
   { name: 'Shopping', color: '#a855f7' },
   { name: 'Groceries', color: '#22c55e' },
@@ -81,19 +58,6 @@ const defaultCategories = [
   { name: 'Unknown', color: '#94a3b8' },
   { name: 'Other', color: '#64748b' }
 ];
-
-const defaultRules = {
-  'croma retail': 'Shopping',
-  'd-mart': 'Groceries',
-  'disney+ hotstar': 'Entertainment',
-  'ola cabs': 'Transport',
-  'zomato': 'Food',
-  'reliance fresh': 'Groceries',
-  'amazon india': 'Shopping',
-  'electricity bill': 'Utilities',
-  'jio recharge': 'Utilities',
-  'bookmyshow': 'Entertainment'
-};
 
 const PALETTE = ['#a855f7', '#22c55e', '#e11d48', '#f59e0b', '#0ea5e9', '#6366f1', '#14b8a6', '#ec4899', '#8b5cf6', '#ef4444'];
 
@@ -158,17 +122,14 @@ function App() {
   const [newGoalCurrent, setNewGoalCurrent] = useState('');
   const [editingGoalId, setEditingGoalId] = useState(null);
 
-  // "Backend" State via LocalStorage
-  const [transactions, setTransactions] = useLocalStorage('fintrack_txs', seedTransactions);
-  const [budgets, setBudgets] = useLocalStorage('fintrack_budgets', seedBudgets);
-  const [categories, setCategories] = useLocalStorage('fintrack_cats', defaultCategories);
-  const [merchantRules, setMerchantRules] = useLocalStorage('fintrack_rules', defaultRules);
-  const [balance, setBalance] = useLocalStorage('fintrack_real_balance', 180000);
+  // "Backend" State via LocalStorage (using _v2 to wipe old dummy data from client browsers)
+  const [transactions, setTransactions] = useLocalStorage('fintrack_txs_v2', []);
+  const [budgets, setBudgets] = useLocalStorage('fintrack_budgets_v2', []);
+  const [categories, setCategories] = useLocalStorage('fintrack_cats_v2', defaultCategories);
+  const [merchantRules, setMerchantRules] = useLocalStorage('fintrack_rules_v2', {});
+  const [balance, setBalance] = useLocalStorage('fintrack_real_balance_v2', 0);
   const [theme, setTheme] = useLocalStorage('fintrack_theme', 'dark');
-  const [goals, setGoals] = useLocalStorage('fintrack_goals', [
-    { id: 1, name: 'Emergency Fund', target: 500000, current: 320000 },
-    { id: 2, name: 'Vacation', target: 150000, current: 45000 }
-  ]);
+  const [goals, setGoals] = useLocalStorage('fintrack_goals_v2', []);
 
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', theme);
