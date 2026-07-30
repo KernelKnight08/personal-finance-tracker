@@ -182,14 +182,24 @@ function App() {
     }).sort((a, b) => b.percent - a.percent);
   }, [budgets, expensesByCategory]);
 
-  const chartData = useMemo(() => [
-    { name: 'Feb', income: 85000, expense: 52000 },
-    { name: 'Mar', income: 92000, expense: 41000 },
-    { name: 'Apr', income: 85000, expense: 63000 },
-    { name: 'May', income: 105000, expense: 48000 },
-    { name: 'Jun', income: 85000, expense: 55000 },
-    { name: 'Jul', income, expense }
-  ], [income, expense]);
+  const chartData = useMemo(() => {
+    const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    const grouped = {};
+    transactions.forEach(tx => {
+      // Parse date string like 'Jul 28, 2026'
+      const d = new Date(tx.date);
+      if (isNaN(d.getTime())) return;
+      const key = `${d.getFullYear()}-${String(d.getMonth()).padStart(2,'0')}`;
+      if (!grouped[key]) grouped[key] = { income: 0, expense: 0, month: d.getMonth(), year: d.getFullYear() };
+      if (tx.type === 'income') grouped[key].income += tx.amount;
+      else grouped[key].expense += Math.abs(tx.amount);
+    });
+    const sorted = Object.entries(grouped)
+      .sort(([a],[b]) => a.localeCompare(b))
+      .slice(-6)
+      .map(([, v]) => ({ name: months[v.month], income: v.income, expense: v.expense }));
+    return sorted.length > 0 ? sorted : [{ name: months[new Date().getMonth()], income: 0, expense: 0 }];
+  }, [transactions]);
 
   const filteredTransactions = useMemo(() => {
     return transactions.filter(tx => 
@@ -349,25 +359,25 @@ function App() {
           <div className="icon-ring primary"><IndianRupee size={22} /></div>
           <div className="card-title">Total Balance</div>
           <div className="stat-number">{formatINR(balance)}</div>
-          <span className="stat-trend up"><TrendingUp size={12} /> +2.5%</span>
+          <span className={`stat-trend ${balance >= 0 ? 'up' : 'down'}`}>{balance >= 0 ? <TrendingUp size={12} /> : <TrendingDown size={12} />} {transactions.length} txns</span>
         </div>
         <div className="card anim-delay-2">
           <div className="icon-ring emerald"><ArrowUpRight size={22} /></div>
           <div className="card-title">Income</div>
           <div className="stat-number">{formatINR(income)}</div>
-          <span className="stat-trend up"><TrendingUp size={12} /> Live</span>
+          <span className="stat-trend up"><TrendingUp size={12} /> {transactions.filter(t => t.type === 'income').length} entries</span>
         </div>
         <div className="card anim-delay-3">
           <div className="icon-ring rose"><ArrowDownRight size={22} /></div>
           <div className="card-title">Expenses</div>
           <div className="stat-number">{formatINR(expense)}</div>
-          <span className="stat-trend down"><TrendingDown size={12} /> Live</span>
+          <span className="stat-trend down"><TrendingDown size={12} /> {transactions.filter(t => t.type === 'expense').length} entries</span>
         </div>
         <div className="card anim-delay-4">
           <div className="icon-ring amber"><PiggyBank size={22} /></div>
           <div className="card-title">Savings</div>
           <div className="stat-number">{formatINR(savings)}</div>
-          <span className="stat-trend up"><TrendingUp size={12} /> Healthy</span>
+          <span className={`stat-trend ${savings >= 0 ? 'up' : 'down'}`}>{savings >= 0 ? <TrendingUp size={12} /> : <TrendingDown size={12} />} {savings >= 0 ? 'Positive' : 'Negative'}</span>
         </div>
       </div>
 
@@ -420,6 +430,12 @@ function App() {
           </button>
         </div>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: '1.5rem', marginTop: '1.5rem' }}>
+          {goals.length === 0 && (
+            <div style={{ padding: '2rem', textAlign: 'center', color: 'hsl(var(--fg-muted))', gridColumn: '1 / -1' }}>
+              <PiggyBank size={32} style={{ margin: '0 auto 0.75rem', display: 'block', opacity: 0.4 }} />
+              No savings goals yet. Create one to start tracking!
+            </div>
+          )}
           {goals.map(goal => {
             const percent = Math.min((goal.current / goal.target) * 100, 100);
             return (
@@ -474,6 +490,12 @@ function App() {
               </tr>
             </thead>
             <tbody>
+              {filteredTransactions.length === 0 && (
+                <tr><td colSpan={6} style={{ textAlign: 'center', padding: '3rem 1rem', color: 'hsl(var(--fg-muted))' }}>
+                  <MessageSquare size={32} style={{ margin: '0 auto 1rem', display: 'block', opacity: 0.4 }} />
+                  No transactions yet. Paste a bank SMS to get started!
+                </td></tr>
+              )}
               {filteredTransactions.map(tx => (
                 <tr key={tx.id}>
                   <td><div style={{ fontWeight: 500 }}>{tx.date}</div><div style={{ fontSize: '0.75rem', color: 'hsl(var(--fg-muted))' }}>{tx.time}</div></td>
@@ -935,8 +957,9 @@ function App() {
                 className="textarea-field"
                 placeholder="e.g. Debited Rs.500 from A/c XX1234 on 28-07-26 by Zomato"
                 value={smsText}
-                onChange={e => setSmsText(e.target.value)}
+                onChange={e => { setSmsText(e.target.value); setSmsErr(''); }}
               />
+              {smsErr && <p style={{ color: 'hsl(var(--rose))', fontSize: '0.8125rem', marginTop: '0.75rem', fontWeight: 500 }}>{smsErr}</p>}
             </div>
             <div className="modal-actions">
               <button className="btn btn-outline" onClick={() => setSmsOpen(false)}>Cancel</button>
