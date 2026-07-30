@@ -131,6 +131,12 @@ function App() {
   const [theme, setTheme] = useLocalStorage('fintrack_theme', 'dark');
   const [goals, setGoals] = useLocalStorage('fintrack_goals_v2', []);
 
+  const [isSetupComplete, setIsSetupComplete] = useLocalStorage('fintrack_setup_complete_v2', false);
+  const [setupBalanceInput, setSetupBalanceInput] = useState('');
+  const [setupNameInput, setSetupNameInput] = useState('');
+
+  const userName = localStorage.getItem('fintrack_user_name') || 'Guest';
+
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', theme);
   }, [theme]);
@@ -766,6 +772,65 @@ function App() {
     </div>
   );
 
+  // Setup Screen Render
+  if (!isSetupComplete) {
+    return (
+      <div className="app-shell" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+        <div className="live-bg">
+          <div className="live-blob blob-1" />
+          <div className="live-blob blob-2" />
+          <div className="live-blob blob-3" />
+        </div>
+        <div className="glass-panel" style={{ width: '100%', maxWidth: '480px', padding: '2.5rem', position: 'relative', zIndex: 10, textAlign: 'center' }}>
+          <img src="/logo.jpg" alt="FinTrack" style={{ width: '80px', height: '80px', borderRadius: '1rem', margin: '0 auto 1.5rem', display: 'block', boxShadow: 'var(--shadow-md)' }} />
+          <h1 style={{ fontSize: '1.75rem', fontWeight: '700', marginBottom: '0.5rem' }}>Welcome to FinTrack</h1>
+          <p style={{ color: 'hsl(var(--fg-muted))', marginBottom: '2rem' }}>Let's get your finances set up for the first time.</p>
+          
+          <div style={{ textAlign: 'left', marginBottom: '1.5rem' }}>
+            <label className="form-label">What should we call you?</label>
+            <input 
+              type="text" 
+              className="glass-input" 
+              placeholder="e.g. Aadya"
+              value={setupNameInput}
+              onChange={e => setSetupNameInput(e.target.value)}
+            />
+          </div>
+
+          <div style={{ textAlign: 'left', marginBottom: '2rem' }}>
+            <label className="form-label">Current Available Balance (₹)</label>
+            <input 
+              type="number" 
+              className="glass-input" 
+              placeholder="e.g. 50000"
+              value={setupBalanceInput}
+              onChange={e => setSetupBalanceInput(e.target.value)}
+            />
+            <p style={{ fontSize: '0.75rem', color: 'hsl(var(--fg-muted))', marginTop: '0.5rem' }}>
+              We will use this to crosscheck your finances and track your net worth.
+            </p>
+          </div>
+
+          <button 
+            className="btn btn-primary" 
+            style={{ width: '100%', padding: '0.875rem' }}
+            onClick={() => {
+              if (setupBalanceInput && !isNaN(Number(setupBalanceInput))) {
+                setBalance(Number(setupBalanceInput));
+              }
+              if (setupNameInput) {
+                localStorage.setItem('fintrack_user_name', setupNameInput);
+              }
+              setIsSetupComplete(true);
+            }}
+          >
+            Get Started <ArrowUpRight size={18} style={{ marginLeft: '0.5rem' }} />
+          </button>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="app-shell">
       {/* ═══ LIVE BACKGROUND ═══ */}
@@ -810,7 +875,9 @@ function App() {
         <header className="topbar">
           <div className="topbar-left">
             <div className="hide-mobile" style={{ display: 'flex', flexDirection: 'column' }}>
-              <span className="topbar-title" style={{ textTransform: 'capitalize' }}>{currentView}</span>
+              <span className="topbar-title" style={{ textTransform: 'capitalize' }}>
+                {currentView === 'dashboard' ? `Welcome, ${userName}` : currentView}
+              </span>
             </div>
           </div>
           <div className="topbar-right">
